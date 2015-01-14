@@ -3,7 +3,7 @@
 		define('SERVIDOR_MYSQL','localhost'); //servidor de la base de datos
 		define('USUARIO_MYSQL','root'); //usuario de la base de datos
 		define('PASSWORD_MYSQL',''); //la clave para conectar
-		define('BASE_DATOS','estudiante'); // indica el nombre de la base de datos que contiene la tabla de los usuarios
+		define('BASE_DATOS','fundacion_fhofna'); // indica el nombre de la base de datos que contiene la tabla de los usuarios
 
 
 
