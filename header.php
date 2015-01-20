@@ -66,10 +66,10 @@ padding-top: 0px;">
           
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="float: right;">
-            <li class="active"><a href="#">Inventario</a></li>
-            <li><a href="#about">Ingresos/Egresos</a></li>
-            <li><a href="#contact">HV/Asistentes</a></li>
-            <li><a href="#contact">Usuarios</a></li>
+            <li class="active"><a href="ejemplo1.php">Inventario</a></li>
+            <li><a href="egresos.php">Ingresos/Egresos</a></li>
+            <li><a href="hv_asistentes.php">HV/Asistentes</a></li>
+            <li><a href="usuarios.php">Usuarios</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Victor <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
