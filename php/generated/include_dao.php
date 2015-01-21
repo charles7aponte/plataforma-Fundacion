@@ -1,0 +1,61 @@
+<?php
+	//include all DAO files
+	require_once('class/sql/Connection.class.php');
+	require_once('class/sql/ConnectionFactory.class.php');
+	require_once('class/sql/ConnectionProperty.class.php');
+	require_once('class/sql/QueryExecutor.class.php');
+	require_once('class/sql/Transaction.class.php');
+	require_once('class/sql/SqlQuery.class.php');
+	require_once('class/core/ArrayList.class.php');
+	require_once('class/dao/DAOFactory.class.php');
+ 	
+	require_once('class/dao/AsistenteDAO.class.php');
+	require_once('class/dto/Asistente.class.php');
+	require_once('class/mysql/AsistenteMySqlDAO.class.php');
+	require_once('class/mysql/ext/AsistenteMySqlExtDAO.class.php');
+	require_once('class/dao/CategoriaDAO.class.php');
+	require_once('class/dto/Categoria.class.php');
+	require_once('class/mysql/CategoriaMySqlDAO.class.php');
+	require_once('class/mysql/ext/CategoriaMySqlExtDAO.class.php');
+	require_once('class/dao/EgresosDAO.class.php');
+	require_once('class/dto/Egreso.class.php');
+	require_once('class/mysql/EgresosMySqlDAO.class.php');
+	require_once('class/mysql/ext/EgresosMySqlExtDAO.class.php');
+	require_once('class/dao/ElementosDAO.class.php');
+	require_once('class/dto/Elemento.class.php');
+	require_once('class/mysql/ElementosMySqlDAO.class.php');
+	require_once('class/mysql/ext/ElementosMySqlExtDAO.class.php');
+	require_once('class/dao/HojaDeVidaDAO.class.php');
+	require_once('class/dto/HojaDeVida.class.php');
+	require_once('class/mysql/HojaDeVidaMySqlDAO.class.php');
+	require_once('class/mysql/ext/HojaDeVidaMySqlExtDAO.class.php');
+	require_once('class/dao/IngresosDAO.class.php');
+	require_once('class/dto/Ingreso.class.php');
+	require_once('class/mysql/IngresosMySqlDAO.class.php');
+	require_once('class/mysql/ext/IngresosMySqlExtDAO.class.php');
+	require_once('class/dao/InventariosDAO.class.php');
+	require_once('class/dto/Inventario.class.php');
+	require_once('class/mysql/InventariosMySqlDAO.class.php');
+	require_once('class/mysql/ext/InventariosMySqlExtDAO.class.php');
+	require_once('class/dao/ModulosDAO.class.php');
+	require_once('class/dto/Modulo.class.php');
+	require_once('class/mysql/ModulosMySqlDAO.class.php');
+	require_once('class/mysql/ext/ModulosMySqlExtDAO.class.php');
+	require_once('class/dao/OrganizacionDAO.class.php');
+	require_once('class/dto/Organizacion.class.php');
+	require_once('class/mysql/OrganizacionMySqlDAO.class.php');
+	require_once('class/mysql/ext/OrganizacionMySqlExtDAO.class.php');
+	require_once('class/dao/RolesDAO.class.php');
+	require_once('class/dto/Role.class.php');
+	require_once('class/mysql/RolesMySqlDAO.class.php');
+	require_once('class/mysql/ext/RolesMySqlExtDAO.class.php');
+	require_once('class/dao/UsuarioDAO.class.php');
+	require_once('class/dto/Usuario.class.php');
+	require_once('class/mysql/UsuarioMySqlDAO.class.php');
+	require_once('class/mysql/ext/UsuarioMySqlExtDAO.class.php');
+	require_once('class/dao/UsuarioHasModulosDAO.class.php');
+	require_once('class/dto/UsuarioHasModulo.class.php');
+	require_once('class/mysql/UsuarioHasModulosMySqlDAO.class.php');
+	require_once('class/mysql/ext/UsuarioHasModulosMySqlExtDAO.class.php');
+
+?>

@@ -1,6 +1,14 @@
 <?php
 
+
+include_once "php/generated/GeneraHTML.php";
+include_once "php/generated/inventarios/controlInventario.php";
 include_once "header.php";
+
+
+
+//$guardarElemento = new controlInventario();
+//$guardarElemento->guardarInventario();
 
 ?>
 
@@ -9,13 +17,127 @@ include_once "header.php";
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 
 
+<script>
+
+ function changeCategoria(id, nombre)
+ {
+	$("#nombre_categoria").html(""+nombre);
+ 
+	$("#id_categoria").val(id);
+ }
+
+ 
+ 
+ function enviarDatos(){
+ 
+ 
+ if($("#frmRegistrar").validationEngine('validate'))
+ {
+	document.getElementById("frmRegistrar").submit();
+ 
+ }
+ 
+ 
+ return false;
+ 
+ }
+ 
+ 
+ function eliminarElemento(idelementos){
+ 
+ alert (idelementos);
+				if (confirm("Esta seguro de eliminar...")) {
+					//Cedula es igual
+					var ced ="id="+idelementos;
+					$.ajax({ 
+						type: "POST",
+						url:"php/generated/inventarios/eliminar.php",
+						data: ced,
+						success:function(respuesta)
+								{
+									console.log(respuesta);ç
+									
+									
+									if(respuesta=="1")
+									{
+										
+									
+									}
+								//	location.reload(true);
+								}
+					});
+				    
+				}	
+			}
+			
+			
+			
+			function editar(nombre, cantidad,  precio,descripcion, activo){
+				//procedimiento = "editar";
+			
+
+								$('#txtNombres').val(nombre);
+								$('#cantidad').val(cantidad);
+								$('#descripcion').val(descripcion);
+								$('#precio').val(precio);
+								
+								
+								
+								console.log(activo);
+								if(activo==1){
+								
+									document.getElementById("si").checked=true;
+								
+								
+								}
+								
+								else if(activo==0){
+									
+									document.getElementById("no").checked=true;
+								
+								}
+								
+								
+								$("#btnProcesar").html("Editar");
+								
+								
+								$("#miaccion").val("editar");
+
+														
+			}
+			
+			
+			
+			
+	
+
+
+
+	function nuevoElemento(){
+		
+		
+		document.getElementById('frmRegistrar').reset();
+		$("#btnProcesar").html("Agregar");
+		
+		$("#miaccion").val("agregar");
+		return false;
+	}	
+
+</script>
+
+
 
 	
 	
 	
 	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
-      <form name="frmRegistrar" id="frmRegistrar">
-        
+      <form  name="frmRegistrar" id="frmRegistrar"
+	  
+	  action="ejemplo1F.php" method="POST"
+	  >
+        <input type="hidden" name="accion" id="miaccion" value="agregar">
+		
+		
 		<div class="row" style="">
 		
 				
@@ -27,7 +149,7 @@ include_once "header.php";
                        <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp] id="txtNombres" placeholder="Nombre">
+                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
                         </div>
                 </div>         
 				
@@ -48,7 +170,7 @@ include_once "header.php";
                        <label for="descripcion" class="col-sm-3 control-label">Descripcion:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="descripcion" class ="form-control validate[required,custom[onlyLetterSp] id="descripcion" placeholder="Descripcion">
+                          <input type="text"  name="descripcion" class ="form-control validate[required,custom[onlyLetterSp]" id="descripcion" placeholder="Descripcion">
 						  
                         </div>
                 </div>   
@@ -58,9 +180,9 @@ include_once "header.php";
 			<!---columnaderecha-->
 			<div class="col-md-6" style="">
 				<div class="form-group">
-					<label for="precio" class="col-sm-3 control-label">Activo:</label>
-                    <input type="radio" name="activo" value="si" />Si
-                    &nbsp;&nbsp;&nbsp;<input type="radio" name="activo" value="no" />No<br />	
+					<label for="activo" class="col-sm-3 control-label">Activo:</label>
+                    <input type="radio" name="activo" value="1"  id="si" checked/>Si
+                    &nbsp;&nbsp;&nbsp;<input type="radio" name="activo"  value="0" id="no"/>No<br />	
 				</div>
 				
 				<div class="form-group">                    
@@ -72,32 +194,37 @@ include_once "header.php";
 				
 				<div class="form-group">
 					<label for="precio" class="col-sm-3 control-label">Categoria:</label>
-						<div class="dropdown">
-							  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-								Dropdown
-								<span class="caret"></span>
-							  </button>
-								  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-									<li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
-								  </ul>
-						</div>          
+	
+	<br>
+					<div class="dropdown">
+			
+					<?php  
+						$g =new GeneraHTML();
+
+						$g->generarSelecCategoria();
+						
+					
+
+					?>
+					</div>          
 				</div>
-				
-				
+			
 			
 			</div>
 		
 		</div>
 		
-				<button type="button" class="btn btn-primary" style="margin-left: 100px;">
+				<button 
+				
+				onclick="enviarDatos()"
+				type="button" class="btn btn-primary" style="margin-left: 100px;">
+					
+					
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnProcesar">Agregar</b>
 				</button>	
           
-				<button id="btnProcesar" name="btnProcesar" >Procesar 
-				</button>
+				<a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo
+				</a>
             
             
           
@@ -116,34 +243,25 @@ include_once "header.php";
 		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
 					<thead>
 						<tr role="row">
-							<th rowspan="1" colspan="1">Cedula</th>
-							<th rowspan="1" colspan="1">Nombres</th>
-							<th rowspan="1" colspan="1">Apellidos</th>
-							<th rowspan="1" colspan="1">Fecha De Nacimiento</th>
-							<th rowspan="1" colspan="1">Telefono</th>
+							<th rowspan="1" colspan="1">Nombre</th>
+							<th rowspan="1" colspan="1">Activo</th>
+							<th rowspan="1" colspan="1">Precio</th>
+							<th rowspan="1" colspan="1">Categoria</th>
+							<th rowspan="1" colspan="1">Descripcion</th>
+							<th rowspan="1" colspan="1">Cantidad</th>
 							
 							<th rowspan="1" colspan="1"></th>
 						</tr>
 					</thead>
 					<tbody>
+<?php
 
+	$g->crearTabla();
+?>
 						
 			
 
-						<tr role="row" class="odd">
-							<td class="sorting_1">1121878910</td>
-							<td>victor alfonso</td>
-							<td>betancourt sanchez</td>
-							<td>31-03-1991</td>
-							<td>3107928018</td>
-							
-							<td>
-								<img src="images/reload.png" alt="" style="cursor: pointer;" >
-								<img src="images/delete-item.png" alt="" style="cursor: pointer;">
-
-							</td>
-						</tr>
-			
+					
 
 					</tbody>
 					<tfoot>
