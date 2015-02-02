@@ -1,6 +1,10 @@
 <?php
 
+include_once "php/generated/usuarios/GeneraHTMLUsuarios.php";
+include_once "php/generated/inventarios/controlInventario.php";
 include_once "header.php";
+include_once "php/generated/include_dao.php"
+
 
 ?>
 
@@ -9,13 +13,69 @@ include_once "header.php";
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 
 
+<script>
 
+ function enviarDatos(){
+ 
+ 
+ if($("#frmRegistrar").validationEngine('validate'))
+ {
+	document.getElementById("frmRegistrar").submit();
+ 
+ }
+ 
+ 
+ return false;
+ 
+ }
+
+ 
+ 
+ 
+  function eliminarUsuario(idusuario, id){
+ 
+
+				if (confirm("Esta seguro de eliminar?")) {
+					//id es igual
+					var ced ="id="+idusuario;
+					$.ajax({ 
+						type: "POST",
+						url:"php/generated/usuarios/eliminarUsuario.php",
+						data: ced,
+						success:function(respuesta)
+								{
+									console.log(respuesta);
+									
+									
+									if(respuesta=="1")
+									{
+										
+									 $("#"+id).remove();
+									 
+									}
+								//	location.reload(true);
+								}
+					});
+				    
+				}	
+			}
+ 
+ 
+ 
+ 
+</script>
 	
 	
 	
 	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
-      <form name="frmRegistrar" id="frmRegistrar">
-        
+      <form name="frmRegistrar" id="frmRegistrar"
+        action="guardarUsuario.php" method="POST"
+	  >
+        <input type="hidden" name="accion" id="miaccion" value="agregar">
+		
+		
+		
+		
 		<div class="row" style="">
 		
 				
@@ -34,10 +94,10 @@ include_once "header.php";
 				
 				
                    <div class="form-group">                    
-                       <label for="cantidad" class="col-sm-3 control-label">Usuario:</label>
+                       <label for="usuario" class="col-sm-3 control-label">Usuario:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="cantidad" class="form-control" id="cantidad" placeholder="Usuario" >
+                          <input type="text"  name="usuario" class="form-control" id="usuario" placeholder="Usuario" >
                         </div>
                   </div>
 				
@@ -52,10 +112,10 @@ include_once "header.php";
 			<div class="col-md-6" style="">
 			
 				<div class="form-group">                    
-                       <label for="txtNombres" class="col-sm-3 control-label">Apellidos:</label>
+                       <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp] id="txtApellidos" placeholder="Apellidos">
+                          <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp] id="txtApellidos" placeholder="Apellidos">
                         </div>
                 </div>  
 				
@@ -67,12 +127,15 @@ include_once "header.php";
                   </div>
 			
 				<div class="form-group">
-					<label for="precio" class="col-sm-3 control-label">Activo:</label>
-                    <input type="radio" name="activo" value="si" />Si
-                    &nbsp;&nbsp;&nbsp;<input type="radio" name="activo" value="no" />No<br />	
+					<label for="activo" class="col-sm-3 control-label">Activo:</label>
+                    <input type="radio" name="activo" value="1"  id="si" checked/>Si
+                    &nbsp;&nbsp;&nbsp;<input type="radio" name="activo"  value="0" id="no"/>No<br />	
 				</div>
 				
 				
+			  
+						
+
 				
 				
 				
@@ -81,12 +144,17 @@ include_once "header.php";
 		
 		</div>
 		
-				<button type="button" class="btn btn-primary" style="margin-left: 100px;">
+				<button 
+				
+				onclick="enviarDatos()"
+				type="button" class="btn btn-primary" style="margin-left: 100px;">
+					
+					
 					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnProcesar">Agregar</b>
 				</button>	
           
-				<button id="btnProcesar" name="btnProcesar" >Procesar 
-				</button>
+				<a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo
+				</a>
             
             
           
@@ -105,34 +173,24 @@ include_once "header.php";
 		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
 					<thead>
 						<tr role="row">
-							<th rowspan="1" colspan="1">Cedula</th>
-							<th rowspan="1" colspan="1">Nombres</th>
-							<th rowspan="1" colspan="1">Apellidos</th>
-							<th rowspan="1" colspan="1">Fecha De Nacimiento</th>
-							<th rowspan="1" colspan="1">Telefono</th>
+							<th rowspan="1" colspan="1">Nombre</th>
+							<th rowspan="1" colspan="1">Apellido</th>
+							<th rowspan="1" colspan="1">Usuario</th>
+							<th rowspan="1" colspan="1">Clave</th>
+							<th rowspan="1" colspan="1">Activo</th>
 							
-							<th rowspan="1" colspan="1"></th>
+							<th rowspan="1" colspan="1">Acciones</th>
 						</tr>
 					</thead>
-					<tbody>
-
+									<tbody>
+<?php
+	$g =new GeneraHtmlUsuarios();
+	$g->crearTabla_usu();
+?>
 						
 			
 
-						<tr role="row" class="odd">
-							<td class="sorting_1">1121878910</td>
-							<td>victor alfonso</td>
-							<td>betancourt sanchez</td>
-							<td>31-03-1991</td>
-							<td>3107928018</td>
-							
-							<td>
-								<img src="images/reload.png" alt="" style="cursor: pointer;" >
-								<img src="images/delete-item.png" alt="" style="cursor: pointer;">
-
-							</td>
-						</tr>
-			
+					
 
 					</tbody>
 					<tfoot>

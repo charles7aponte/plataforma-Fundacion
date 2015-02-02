@@ -43,10 +43,10 @@ include_once "header.php";
  }
  
  
- function eliminarElemento(idelementos){
+ function eliminarElemento(idelementos, id){
  
- alert (idelementos);
-				if (confirm("Esta seguro de eliminar...")) {
+
+				if (confirm("Esta seguro de eliminar?")) {
 					//Cedula es igual
 					var ced ="id="+idelementos;
 					$.ajax({ 
@@ -55,13 +55,14 @@ include_once "header.php";
 						data: ced,
 						success:function(respuesta)
 								{
-									console.log(respuesta);ç
+									console.log(respuesta);
 									
 									
 									if(respuesta=="1")
 									{
 										
-									
+									 $("#"+id).remove();
+									 
 									}
 								//	location.reload(true);
 								}
@@ -130,7 +131,7 @@ include_once "header.php";
 	
 	
 	
-	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
+	<fieldset style="border:1px solid white"><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
       <form  name="frmRegistrar" id="frmRegistrar"
 	  
 	  action="ejemplo1F.php" method="POST"

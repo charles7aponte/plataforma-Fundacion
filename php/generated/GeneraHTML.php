@@ -36,7 +36,7 @@ class  GeneraHTML{
 		for($i=0;$i< count($datos); $i++)
 			{
 												
-						echo "<tr role='row' class='odd'>";
+						echo "<tr role='row' class='odd' id='lista_elementos_".($i)."'>";
 						//echo "	<td class='sorting_1'>".$datos[$i]->idelementos."</td>";
 						echo "	<td>".$datos[$i]->nombre."</td>";
 						echo "	<td>".$datos[$i]->activo."</td>";
@@ -50,7 +50,7 @@ class  GeneraHTML{
 						echo "		<img src='images/reload.png' alt='' ";
 						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->cantidad."', '".$datos[$i]->precio."', '".$datos[$i]->descripcion."',".$datos[$i]->activo.")\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarElemento(".$datos[$i]->idelementos.")\">";
+						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarElemento(".$datos[$i]->idelementos.",'lista_elementos_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";
