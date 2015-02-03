@@ -3,7 +3,7 @@
  * Class that operate on table 'hoja_de_vida'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-01-21 03:18
+ * @date: 2015-02-03 03:54
  */
 class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 

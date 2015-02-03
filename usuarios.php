@@ -74,6 +74,7 @@ include_once "header.php";
 	  >
         <input type="hidden" name="accion" id="miaccion" value="agregar">
 		
+		<input type="hidden" name="organizacion_idorganizacion"  value="0">
 		
 		
 		

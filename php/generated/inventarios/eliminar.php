@@ -1,10 +1,10 @@
 <?php
 
-require_once('../GeneraHTML.php');
+require_once('controlInventario.php');
 
 $idelemento=$_POST['id'];
 
-$d =new GeneraHTML();
+$d =new controlInventario();
 
 
 $salida =$d->eliminarElemento($idelemento);

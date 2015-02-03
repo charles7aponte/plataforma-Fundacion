@@ -11,24 +11,26 @@
 		
 			$txtNombres= $_POST['txtNombres'];
 			$txtApellidos= $_POST['txtApellidos'];
-			$usuario= $_POST['usuario'];
+			$usuario1= $_POST['usuario'];
 			$activo= $_POST['activo'];
 			$organizacion_idorganizacion= $_POST['organizacion_idorganizacion'];
 			
 			
-			echo "------$activo";
+			echo "------$organizacion_idorganizacion";
 			
 			
 			
 			$usuario=  new Usuario();
 			
 			
-			$usuario->idusuario;
+			
+			
 			$usuario->nombre= $txtNombres;
 			$usuario->apellido= $txtApellidos;
-			$usuario->usuario=$usuario;
+			$usuario->usuario=$usuario1;
 			$usuario->activo=$activo;
-			$usuario->organizacion_idorganizacion=$organizacion_idorganizacion;
+			$usuario->clave="saflkclave";
+			$usuario->organizacionIdorganizacion=$organizacion_idorganizacion;
 			
 				
 			DAOFactory::getUsuarioDAO()->insert($usuario);

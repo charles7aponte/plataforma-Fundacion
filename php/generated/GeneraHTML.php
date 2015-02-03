@@ -70,24 +70,7 @@ class  GeneraHTML{
 	
 	}
 	
-	
-	public function eliminarElemento($idelementos){
-	
-		return $rowsDeleted = DAOFactory::getElementosDAO()->delete($idelementos);
 
-	
-	
-	}
-	
-	
-	
-	public function editarElemento($idelementos){
-	
-		return $rowsUpdate = DAOFactory::getModulesDAO()->update($idelementos);
-
-	
-	
-	}
 	
 	
 	

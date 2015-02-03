@@ -1,12 +1,11 @@
 <?php
 
 	//include all DAO files
-	//@require_once('../include_dao.php');
+	
+@include_once ("../include_dao.php");
 
 
-
-
-class  GeneraHtmlUsuarios{
+class  GeneraHTMLUsuarios{
 
 
 	public function crearTabla_usu(){

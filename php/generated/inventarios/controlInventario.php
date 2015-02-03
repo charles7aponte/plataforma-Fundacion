@@ -1,5 +1,8 @@
 <?php 
 
+
+@include_once("../include_dao.php");
+
 	class controlInventario{
 
 
@@ -67,6 +70,28 @@
 				DAOFactory::getElementosDAO()->update($elemento);
 		
 			}
+		}
+		
+		
+		
+		
+			
+		public function eliminarElemento($idelementos){
+		
+			return $rowsDeleted = DAOFactory::getElementosDAO()->delete($idelementos);
+
+		
+		
+		}
+		
+		
+		
+		public function editarElemento($idelementos){
+		
+			return $rowsUpdate = DAOFactory::getModulesDAO()->update($idelementos);
+
+		
+		
 		}
 	
 
