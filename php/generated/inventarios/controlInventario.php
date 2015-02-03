@@ -16,7 +16,7 @@
 			$id_categoria= $_POST['id_categoria'];
 			$txtNombres= $_POST['txtNombres'];
 			
-			echo "------$activo";
+;
 			
 			
 			
@@ -36,6 +36,37 @@
 			DAOFactory::getElementosDAO()->insert($elementos);
 		
 			}	
+		}
+		
+		 
+		
+		public function editarElementos(){
+		
+			if(isset($_POST['miid']))
+			{
+				$elemento=DAOFactory::getElementosDAO()->load($_POST['miid']);
+						$cantidad= $_POST['cantidad'];
+						$descripcion= $_POST['descripcion'];
+						$activo= $_POST['activo'];
+						$precio= $_POST['precio'];
+						$id_categoria= $_POST['id_categoria'];
+						$txtNombres= $_POST['txtNombres'];
+						
+						
+							
+						$elemento->nombre= $txtNombres;
+						$elemento->activo=$activo;
+						$elemento->precio=$precio;
+						$elemento->categoria= $id_categoria;
+						$elemento->descripcion = $descripcion;
+						$elemento->cantidad= $cantidad;
+						$elemento->categoriaId= $id_categoria;
+					
+			
+				
+				DAOFactory::getElementosDAO()->update($elemento);
+		
+			}
 		}
 	
 

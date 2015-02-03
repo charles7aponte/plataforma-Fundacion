@@ -1,9 +1,10 @@
 <?php
 
+include_once "php/generated/include_dao.php";
 include_once "php/generated/usuarios/GeneraHTMLUsuarios.php";
 include_once "php/generated/inventarios/controlInventario.php";
 include_once "header.php";
-include_once "php/generated/include_dao.php"
+
 
 
 ?>

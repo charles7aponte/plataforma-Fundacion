@@ -1,7 +1,7 @@
 <?php
 
 	//include all DAO files
-	//require_once('../include_dao.php');
+	//@require_once('../include_dao.php');
 
 
 
@@ -44,7 +44,7 @@ class  GeneraHtmlUsuarios{
 	
 	
 	
-		public function eliminarElemento($idusuario){
+	public function eliminarUsuario($idusuario){
 	
 		return $rowsDeleted = DAOFactory::getUsuarioDAO()->delete($idusuario);
 

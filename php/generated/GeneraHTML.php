@@ -30,7 +30,7 @@ class  GeneraHTML{
 	public function crearTabla(){
 	
 		$datos=DAOFactory::getElementosDAO()->queryAll();
-
+	    $nombreActivo="";
 		if(count($datos)>0)
 		{
 		for($i=0;$i< count($datos); $i++)
@@ -39,16 +39,27 @@ class  GeneraHTML{
 						echo "<tr role='row' class='odd' id='lista_elementos_".($i)."'>";
 						//echo "	<td class='sorting_1'>".$datos[$i]->idelementos."</td>";
 						echo "	<td>".$datos[$i]->nombre."</td>";
-						echo "	<td>".$datos[$i]->activo."</td>";
+						
+						
+						if($datos[$i]->activo=="0")
+						{
+							$nombreActivo="No";
+						}
+						else {
+							$nombreActivo="Si";
+				
+						}
+						
+						echo "	<td>".$nombreActivo."</td>";
 						echo "	<td>".$datos[$i]->precio."</td>";
-						echo "	<td>".$datos[$i]->categoria."</td>";
+						echo "	<td class='mi_td_categoria'>".$datos[$i]->categoria."</td>";
 						echo "	<td>".$datos[$i]->descripcion."</td>";
 						echo "	<td>".$datos[$i]->cantidad."</td>";
 						
 							
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->cantidad."', '".$datos[$i]->precio."', '".$datos[$i]->descripcion."',".$datos[$i]->activo.")\" ";
+						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->cantidad."', '".$datos[$i]->precio."', '".$datos[$i]->descripcion."',".$datos[$i]->activo.",".$datos[$i]->categoria.",".$datos[$i]->idelementos.")\" ";
 						echo "style='cursor: pointer;' >";
 						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarElemento(".$datos[$i]->idelementos.",'lista_elementos_".($i)."')\">";
 
@@ -107,7 +118,7 @@ class  GeneraHTML{
 			echo "<ul class='dropdown-menu' role='menu' aria-labelledby='dropdownMenu1'>";
 			for($i=0;$i< count($datos); $i++)
 			{
-				echo "<li role='presentation' onclick=\"changeCategoria(".$datos[$i]->id.",'".$datos[$i]->nombre."'  )\"><a role='menuitem' onclick='return false' tabindex='-1' href='#'>".$datos[$i]->nombre."</a></li>";
+				echo "<li role='presentation' id='id_lista_selec_categoria_".$datos[$i]->id."' onclick=\"changeCategoria(".$datos[$i]->id.",'".$datos[$i]->nombre."'  )\"><a role='menuitem' onclick='return false' tabindex='-1' href='#'>".$datos[$i]->nombre."</a></li>";
 			}
 			echo "</ul>";
 		}

@@ -28,17 +28,6 @@ include_once "header.php";
 
  
  
- function cambioCategoriById(id){
- 
-	var nombreSelect = $("#id_lista_selec_categoria_"+id+" a").html(); 
-	
-	$("#nombre_categoria").html(""+nombreSelect);
-	
-	$("#id_categoria").val(id);
- 
- }
- 
- 
  function enviarDatos(){
  
  
@@ -84,7 +73,7 @@ include_once "header.php";
 			
 			
 			
-			function editar(nombre, cantidad,  precio,descripcion, activo,categoria, miid){
+			function editar(nombre, cantidad,  precio,descripcion, activo){
 				//procedimiento = "editar";
 			
 
@@ -92,7 +81,7 @@ include_once "header.php";
 								$('#cantidad').val(cantidad);
 								$('#descripcion').val(descripcion);
 								$('#precio').val(precio);
-								$("#miid").val(miid);
+								
 								
 								
 								console.log(activo);
@@ -115,9 +104,6 @@ include_once "header.php";
 								
 								$("#miaccion").val("editar");
 
-								
-								cambioCategoriById(categoria);
-								
 														
 			}
 			
@@ -135,25 +121,8 @@ include_once "header.php";
 		$("#btnProcesar").html("Agregar");
 		
 		$("#miaccion").val("agregar");
-		
 		return false;
 	}	
-	
-	
-	
-	function cambiarIdCategoriaPorElNombreTable(){
-		var lista = $(".mi_td_categoria");
-		
-		for(var i=0; i< lista.length ; i++)
-		{
-			var miHtml=$(lista[i]).html();
-			
-			var nombreSelect = $("#id_lista_selec_categoria_"+miHtml+" a").html(); 
-			$(lista[i]).html(nombreSelect);
-			
-		}
-	
-	}
 
 </script>
 
@@ -168,8 +137,6 @@ include_once "header.php";
 	  action="ejemplo1F.php" method="POST"
 	  >
         <input type="hidden" name="accion" id="miaccion" value="agregar">
-		<input type="hidden" name="miid" id="miid" value="">
-	
 		
 		
 		<div class="row" style="">
@@ -313,8 +280,6 @@ include_once "header.php";
 
 <script>
 $("#frmRegistrar").validationEngine();
-
-cambiarIdCategoriaPorElNombreTable();
 </script>
 
  
