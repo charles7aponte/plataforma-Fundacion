@@ -1,5 +1,8 @@
 <?php
 
+
+include_once "php/generated/GeneraHTMLIngresos.php";
+include_once "php/generated/inventarios/controlInventario.php";
 include_once "header.php";
 
 ?>
@@ -78,7 +81,7 @@ include_once "header.php";
                   
                   
                     <div class="form-group">                    
-                       <label for="concepto" class="col-sm-3 control-label">Concepto:</label>
+                       <label for="concepto" class="col-sm-3 control-label">Por concepto:</label>
                     
                         <div class="col-sm-9">
                           <input type="text" class="form-control" id="concepto" placeholder="">
@@ -90,7 +93,7 @@ include_once "header.php";
                        <label for="beneficiario" class="col-sm-3 control-label">Beneficiario:</label>
                     
                         <div class="col-sm-9">
-                          <input type="email" class="form-control" id="beneficiario" name="beneficiario" placeholder="">
+                          <input type="email" class="form-control" id="beneficiario" name="beneficiario" placeholder="Beneficiario">
                         </div>
                   </div>
                   
@@ -101,10 +104,21 @@ include_once "header.php";
                        <label for="modalidad" class="col-sm-3 control-label">Modalidad</label>
                     
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modalidad" name="modalidad" >
+                            <input type="text" class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad">
+                        </div>
+                  </div>
+              
+			  
+			  
+			  <div class="form-group">                    
+                       <label for="aprobado" class="col-sm-3 control-label">Aprobado por:</label>
+                    
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="aprobado" name="aprobado" placeholder="Beneficiario" >
                         </div>
                   </div>
               </div>
+			  
               
               
               <!-- columna dere-->
@@ -164,6 +178,65 @@ include_once "header.php";
           
       </form>
     </fieldset>
+	
+	
+	
+	
+	
+	
+	
+	<!---tabla--->
+	<br />
+	<br />
+	<br />
+	<br />
+		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+					<thead>
+						<tr role="row">
+							
+							<th rowspan="1" colspan="1">Fecha</th>
+							<th rowspan="1" colspan="1">Ciudad</th>
+							
+							<th rowspan="1" colspan="1">Valor</th>
+							<th rowspan="1" colspan="1">Por concepto</th>
+							<th rowspan="1" colspan="1">Recibido de</th>
+							<th rowspan="1" colspan="1">Beneficiario</th>
+							<th rowspan="1" colspan="1">CC o NIT</th>
+							<th rowspan="1" colspan="1">Modalidad</th>
+							<th rowspan="1" colspan="1">Aprobado por</th>
+							
+							<th rowspan="1" colspan="1"></th>
+						</tr>
+					</thead>
+					<tbody>
+
+					<?php
+					$g =new GeneraHTMLIngresos();
+
+					$g->crearTabla_ingresos();
+					?>
+			
+
+					
+
+					</tbody>
+					<tfoot>
+						
+					</tfoot>
+
+
+		</table>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 <script>
 $("#frmRegistrar").validationEngine();

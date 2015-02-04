@@ -3,7 +3,7 @@
  * Class that operate on table 'asistente'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-03 03:54
+ * @date: 2015-02-04 22:29
  */
 class AsistenteMySqlDAO implements AsistenteDAO{
 
@@ -16,7 +16,7 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 	public function load($email, $organizacionIdorganizacion){
 		$sql = 'SELECT * FROM asistente WHERE email = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($email);
+		$sqlQuery->set($email);
 		$sqlQuery->setNumber($organizacionIdorganizacion);
 
 		return $this->getRow($sqlQuery);
@@ -49,7 +49,7 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 	public function delete($email, $organizacionIdorganizacion){
 		$sql = 'DELETE FROM asistente WHERE email = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->setNumber($email);
+		$sqlQuery->set($email);
 		$sqlQuery->setNumber($organizacionIdorganizacion);
 
 		return $this->executeUpdate($sqlQuery);
@@ -70,7 +70,7 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 		$sqlQuery->set($asistente->ciudad);
 
 		
-		$sqlQuery->setNumber($asistente->email);
+		$sqlQuery->set($asistente->email);
 
 		$sqlQuery->setNumber($asistente->organizacionIdorganizacion);
 

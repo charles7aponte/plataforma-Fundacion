@@ -1,5 +1,8 @@
 <?php
 
+include_once "php/generated/include_dao.php";
+include_once "php/generated/GeneraHTMLAsistentes.php";
+include_once "php/generated/asistentes/controlAsistente.php";
 include_once "header.php";
 
 ?>
@@ -63,6 +66,101 @@ include_once "header.php";
         $("#text_bt_guardo").html("Agregar "+valor);
         
     }
+	
+	
+	
+	 function enviarDatos(){
+ 
+		 
+		 if($("#frmRegistrar").validationEngine('validate'))
+		 {
+			document.getElementById("frmRegistrar").submit();
+		 
+		 }
+		 
+		 
+		 return false;
+		 
+	 }
+	 
+	 
+	 
+  function eliminarAsistente(email, id){
+ 
+
+				if (confirm("Esta seguro de eliminar?")) {
+					//id es igual
+					var ced ="id="+email;
+					$.ajax({ 
+						type: "POST",
+						url:"php/generated/asistentes/eliminarAsistente.php",
+						data: ced,
+						success:function(respuesta)
+								{
+									console.log(respuesta);
+									
+									
+									if(respuesta=="1")
+									{
+										
+									 $("#"+id).remove();
+									 
+									}
+								//	location.reload(true);
+								}
+					});
+				    
+				}	
+			}
+      
+      
+      
+      
+      function editar(email, nombres, apellidos, edad, ciudad, miid){
+				//procedimiento = "editar";
+			
+                $('#email').val(email);
+								$('#txtNombres').val(nombres);
+                $('#txtApellidos').val(apellidos);
+								$('#edad').val(edad);
+                $('#ciudad').val(ciudad);
+								$("#miid").val(miid);
+                ////$('#descripcion').val(descripcion);
+								//$('#precio').val(precio);
+								
+								
+								
+								/*console.log(activo);
+								if(activo==1){
+								
+									document.getElementById("si").checked=true;
+								
+								
+								}
+								
+								else if(activo==0){
+									
+									document.getElementById("no").checked=true;
+								
+								}*/
+								
+								
+								$("#btnProcesar").html("Editar");
+								
+								
+								$("#miaccion").val("editar");
+
+								
+								//cambioCategoriById(categoria);
+								
+														
+			}
+			
+	
+      
+      
+      
+ 
     
 </script>
 
@@ -75,8 +173,22 @@ include_once "header.php";
 
 
 <fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
-      <form name="frmRegistrar" id="frmRegistrar" class="form-horizontal">
+  
+  <?php  if(isset($_GET['e']))
+    {
+    ?>
+  <label>el correo no puede repetir </label>
+ 
+   <?php
+    }
+    ?>
+      <form name="frmRegistrar" id="frmRegistrar"  action="guardarAsistente.php" method="POST" class="form-horizontal">
           <input type="hidden" id="accion" value="hv">
+          
+          <input type="hidden" name="accion" id="miaccion" value="agregar">
+          <input type="hidden" name="miid" id="miid" value="">
+          
+          		<input type="hidden" name="organizacion_idorganizacion"  value="0">
           
           <div class="row">
               
@@ -87,7 +199,7 @@ include_once "header.php";
                        <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp] id="txtNombres" placeholder="Nombre">
+                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
                         </div>
                 </div>
 				
@@ -127,7 +239,7 @@ include_once "header.php";
                        <label for="ciudad" class="col-sm-3 control-label">Ciudad:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="ciudad" class ="form-control validate[required,custom[onlyLetterSp] id="ciudad" placeholder="Ciudad">
+                          <input type="text"  name="ciudad" class ="form-control validate[required,custom[onlyLetterSp]" id="ciudad" placeholder="Ciudad">
                         </div>
                 </div>
 					
@@ -141,10 +253,10 @@ include_once "header.php";
 			  
 					<div class="col-md-6">
 					   <div class="form-group">                    
-						   <label for="txtNombres" class="col-sm-3 control-label">Apellidos:</label>
+						   <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
 						
 							<div class="col-sm-9">
-							  <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp] id="txtApellidos" placeholder="Apellidos">
+							  <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp]" id="txtApellidos" placeholder="Apellidos">
 							</div>
 					</div>
 
@@ -152,7 +264,7 @@ include_once "header.php";
                        <label for="edad" class="col-sm-3 control-label">Edad:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="edad" class="form-control" id="edad" placeholder="Apellidos">
+                          <input type="text"  name="edad" class="form-control" id="edad" placeholder="Edad">
                         </div>
 					</div>
 				
@@ -186,16 +298,65 @@ include_once "header.php";
           </div>
           
           
-          <div class="row">
-              
-              <button type="button" class="btn btn-primary" style="margin-left: 69px;">
-                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="text_bt_guardo">Agregar Ingreso</b>
-              </button>
+          <button 
+				
+				onclick="enviarDatos()"
+				type="button" class="btn btn-primary" style="margin-left: 100px;">
+					
+					
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnProcesar">Agregar</b>
+				</button>	
           
-          </div>
+				<a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo
+				</a>
           
       </form>
     </fieldset>
+	
+	
+	
+	
+	
+	<!---tabla--->
+	<br />
+	<br />
+	<br />
+	<br />
+		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+					<thead>
+						<tr role="row">
+							<th rowspan="1" colspan="1">Email</th>
+							<th rowspan="1" colspan="1">Nombres</th>
+							<th rowspan="1" colspan="1">Apellidos</th>
+							<th rowspan="1" colspan="1">Edad</th>
+							<th rowspan="1" colspan="1">Ciudad</th>
+							
+							<th rowspan="1" colspan="1">Acciones</th>
+						</tr>
+					</thead>
+									<tbody>
+<?php
+	$g =new GeneraHTMLAsistentes();
+	$g->crearTabla_asistentes();
+?>
+						
+			
+
+					
+
+					</tbody>
+					<tfoot>
+						
+					</tfoot>
+
+
+		</table>
+
+	
+	
+	
+	
+	
 
 <script>
 $("#frmRegistrar").validationEngine();

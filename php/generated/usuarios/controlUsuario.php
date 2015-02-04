@@ -61,8 +61,8 @@
 		
 			if(isset($_POST['miid']))
 			{
-				$elemento=DAOFactory::getElementosDAO()->load($_POST['miid']);
-						$txtNombres= $_POST['txtNombres'];
+			$usuario=DAOFactory::getUsuarioDAO()->load($_POST['miid']);
+			$txtNombres= $_POST['txtNombres'];
             $txtApellidos= $_POST['txtApellidos'];
             $usuario1= $_POST['usuario'];
             $activo= $_POST['activo'];

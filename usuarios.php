@@ -68,8 +68,8 @@ include_once "header.php";
 			
 
 								$('#txtNombres').val(nombre);
-                $('#usuario').val(usuario);
-                $('#txtApellidos').val(apellido);
+								$('#usuario').val(usuario);
+								$('#txtApellidos').val(apellido);
 								$('#clave').val(clave);
 								$("#miid").val(miid);
                 ////$('#descripcion').val(descripcion);
