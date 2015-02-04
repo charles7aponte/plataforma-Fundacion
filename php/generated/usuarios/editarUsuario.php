@@ -7,7 +7,7 @@ $idusuarios=$_POST['id'];
 $d =new controlUsuario();
 
 
-$salida =$d->eliminarUsuario($idusuarios);
+$salida =$d->editarUsuario($idusuarios);
 echo $salida;
 
 

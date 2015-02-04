@@ -1,9 +1,9 @@
 <?php
 
-	//include all DAO files
-	
-@include_once ("../include_dao.php");
-
+	//include all DAO files	
+  //@include_once ("../include_dao.php");
+  //include all DAO files
+	require_once('include_dao.php');
 
 class  GeneraHTMLUsuarios{
 
@@ -24,13 +24,21 @@ class  GeneraHTMLUsuarios{
 						echo "	<td>".$datos[$i]->apellido."</td>";
 						echo "	<td>".$datos[$i]->usuario."</td>";
 						echo "	<td>".$datos[$i]->clave."</td>";
-						echo "	<td>".$datos[$i]->activo."</td>";
-					
+            
+            if($datos[$i]->activo=="0")
+						{
+							$nombreActivo="No";
+						}
+						else {
+							$nombreActivo="Si";
+				
+						}
 						
+						echo "	<td>".$nombreActivo."</td>";
 							
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->apellido."', '".$datos[$i]->usuario."', '".$datos[$i]->clave."',".$datos[$i]->activo.")\" ";
+						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->apellido."', '".$datos[$i]->usuario."', '".$datos[$i]->clave."',".$datos[$i]->activo.", ".$datos[$i]->idusuario.")\" ";
 						echo "style='cursor: pointer;' >";
 						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarUsuario(".$datos[$i]->idusuario.",'lista_usuarios_".($i)."')\">";
 
@@ -43,13 +51,7 @@ class  GeneraHTMLUsuarios{
 	
 	
 	
-	public function eliminarUsuario($idusuario){
 	
-		return $rowsDeleted = DAOFactory::getUsuarioDAO()->delete($idusuario);
-
-	
-	
-	}
 	
 	
 	

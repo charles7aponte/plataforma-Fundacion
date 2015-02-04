@@ -1,8 +1,8 @@
 <?php
 
 include_once "php/generated/include_dao.php";
-include_once "php/generated/usuarios/GeneraHTMLUsuarios.php";
-include_once "php/generated/inventarios/controlInventario.php";
+include_once "php/generated/GeneraHTMLUsuarios.php";
+include_once "php/generated/usuarios/controlUsuario.php";
 include_once "header.php";
 
 
@@ -60,7 +60,65 @@ include_once "header.php";
 				    
 				}	
 			}
+      
+      
+      
+  function editar(nombre, apellido, usuario, clave, activo, miid){
+				//procedimiento = "editar";
+			
+
+								$('#txtNombres').val(nombre);
+                $('#usuario').val(usuario);
+                $('#txtApellidos').val(apellido);
+								$('#clave').val(clave);
+								$("#miid").val(miid);
+                ////$('#descripcion').val(descripcion);
+								//$('#precio').val(precio);
+								
+								
+								
+								console.log(activo);
+								if(activo==1){
+								
+									document.getElementById("si").checked=true;
+								
+								
+								}
+								
+								else if(activo==0){
+									
+									document.getElementById("no").checked=true;
+								
+								}
+								
+								
+								$("#btnProcesar").html("Editar");
+								
+								
+								$("#miaccion").val("editar");
+
+								
+								//cambioCategoriById(categoria);
+								
+														
+			}
+			
+			
+			
+      
+      
  
+ 
+  function nuevoElemento(){
+		
+		
+		document.getElementById('frmRegistrar').reset();
+		$("#btnProcesar").html("Agregar");
+		
+		$("#miaccion").val("agregar");
+		
+		return false;
+	}	
  
  
  
@@ -73,6 +131,7 @@ include_once "header.php";
         action="guardarUsuario.php" method="POST"
 	  >
         <input type="hidden" name="accion" id="miaccion" value="agregar">
+        <input type="hidden" name="miid" id="miid" value="">
 		
 		<input type="hidden" name="organizacion_idorganizacion"  value="0">
 		
@@ -89,7 +148,7 @@ include_once "header.php";
                        <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp] id="txtNombres" placeholder="Nombre">
+                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
                         </div>
                 </div>         
 				
@@ -117,7 +176,7 @@ include_once "header.php";
                        <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp] id="txtApellidos" placeholder="Apellidos">
+                          <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp]" id="txtApellidos" placeholder="Apellidos">
                         </div>
                 </div>  
 				
@@ -128,7 +187,7 @@ include_once "header.php";
                        </div>
                   </div>
 			
-				<div class="form-group">
+					<div class="form-group">
 					<label for="activo" class="col-sm-3 control-label">Activo:</label>
                     <input type="radio" name="activo" value="1"  id="si" checked/>Si
                     &nbsp;&nbsp;&nbsp;<input type="radio" name="activo"  value="0" id="no"/>No<br />	
