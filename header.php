@@ -68,7 +68,7 @@ padding-top: 0px;">
             <ul class="nav navbar-nav" style="float: right;">
             <li class="active"><a href="ejemplo1.php">Inventario</a></li>
             <li><a href="egresos.php">Ingresos/Egresos</a></li>
-            <li><a href="hv_asistentes.php">HV/Asistentes</a></li>
+            <li><a href="hv.php">HV/Asistentes</a></li>
             <li><a href="usuarios.php">Usuarios</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Victor <span class="caret"></span></a>

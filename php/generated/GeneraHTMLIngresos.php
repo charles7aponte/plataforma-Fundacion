@@ -22,8 +22,8 @@ class  GeneraHTMLIngresos{
 						echo "	<td>".$datos[$i]->ciudad."</td>";
 						echo "	<td>".$datos[$i]->fecha."</td>";
 						echo "	<td>".$datos[$i]->valor."</td>";
-						echo "	<td>".$datos[$i]->recibido_de."</td>";
-						echo "	<td>".$datos[$i]->concepto_de."</td>";
+						echo "	<td>".$datos[$i]->recibidoDe."</td>";
+						echo "	<td>".$datos[$i]->conceptoDe."</td>";
 						echo "	<td>".$datos[$i]->modalidad."</td>";
 						echo "	<td>".$datos[$i]->beneficiario."</td>";
 						echo "	<td>".$datos[$i]->cc."</td>";

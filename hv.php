@@ -2,7 +2,9 @@
 
 include_once "php/generated/include_dao.php";
 include_once "php/generated/GeneraHTMLAsistentes.php";
+include_once "php/generated/GeneraHTMLhv.php";
 include_once "php/generated/asistentes/controlAsistente.php";
+include_once "php/generated/hojas_de_vida/controlHv.php";
 include_once "header.php";
 
 ?>
@@ -86,15 +88,15 @@ include_once "header.php";
 	 
 	 
 	 
-  function eliminarAsistente(email, id){
+  function eliminarHv(id, Id){
  
 
 				if (confirm("Esta seguro de eliminar?")) {
 					//id es igual
-					var ced ="id="+email;
+					var ced ="id="+id;
 					$.ajax({ 
 						type: "POST",
-						url:"php/generated/asistentes/eliminarAsistente.php",
+						url:"php/generated/hojas_de_vida/eliminarHv.php",
 						data: ced,
 						success:function(respuesta)
 								{
@@ -104,7 +106,7 @@ include_once "header.php";
 									if(respuesta=="1")
 									{
 										
-									 $("#"+id).remove();
+									 $("#"+Id).remove();
 									 
 									}
 								//	location.reload(true);
@@ -117,14 +119,19 @@ include_once "header.php";
       
       
       
-      function editar(email, nombres, apellidos, edad, ciudad, miid){
+      function editar(nombres, apellidos,fechaNac, edad, email, direccion, cc, godson, telefono, miid){
 				//procedimiento = "editar";
 			
-                $('#email').val(email);
+                
 								$('#txtNombres').val(nombres);
                 $('#txtApellidos').val(apellidos);
+                $('#p_fecha_nacimiento').val(fechaNac);
 								$('#edad').val(edad);
-                $('#ciudad').val(ciudad);
+                $('#email').val(email);
+                $('#direccion').val(direccion);
+                $('#cc').val(cc);
+                $('#godson').val(godson);
+                $('#telefono').val(telefono);
 								$("#miid").val(miid);
                 ////$('#descripcion').val(descripcion);
 								//$('#precio').val(precio);
@@ -179,8 +186,8 @@ include_once "header.php";
 
 
 <ul class="nav nav-pills">
-    <li id="b_hv"   data-contenido="hv" ><a href="hv.php">HV</a></li>
-  <li id="b_asistente"  class="active" data-contenido="Asistente"><a href="#">Asistentes</a></li>
+    <li id="b_hv"   data-contenido="hv"  class="active" ><a href="#">HV</a></li>
+    <li id="b_asistente"   data-contenido="Asistente"><a href="hv_asistentes.php">Asistentes</a></li>
 </ul>
 
 
@@ -214,15 +221,15 @@ include_once "header.php";
                           <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
                         </div>
                 </div>
-				<!--
+				
 				<div class="form-group" id="p_fecha_nacimiento">                    
                        <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha de nacimiento:</label>
                     
                         <div class="col-sm-9">
-                          <input type="date"  name="fec_nacimiento" class ="form-control" id="txtNombres" placeholder="Fecha de nacimiento">
+                          <input type="date"  name="p_fecha_nacimiento" class ="form-control"  placeholder="Fecha de nacimiento">
                         </div>
                 </div>
-				-->
+				
 				<div class="form-group">                    
                        <label for="email" class="col-sm-3 control-label">Email:</label>
                     
@@ -230,7 +237,7 @@ include_once "header.php";
                           <input type="email"  name="email" class="form-control" id="email" placeholder="Email">
                         </div>
                   </div>
-<!--
+
 				<div class="form-group" id="p_cc">                    
                        <label for="cc" class="col-sm-3 control-label">CC :</label>
                     
@@ -246,7 +253,7 @@ include_once "header.php";
                           <input type="text"  name="telefono" class="form-control" id="telefono" placeholder="Telefono">
                         </div>
 				</div>
--->
+
 					
 				<div class="form-group" id="p_ciudad">                    
                        <label for="ciudad" class="col-sm-3 control-label">Ciudad:</label>
@@ -281,7 +288,7 @@ include_once "header.php";
                         </div>
 					</div>
 				
-					<!--
+					
                   
                   
                     <div class="form-group" id="p_direccion">                    
@@ -296,12 +303,12 @@ include_once "header.php";
 						   <label for="godson" class="col-sm-3 control-label">Godson:</label>
 						
 							<div class="col-sm-9">
-							  <input type="text"  name="godson" class ="form-control validate[required,custom[onlyLetterSp] id="godson" placeholder="Godson">
+							  <input type="text"  name="godson" class ="form-control validate[required,custom[onlyLetterSp]" id="godson" placeholder="Godson">
 							</div>
 					</div>
 					
 					
-          -->        
+                  
                   
                  
                   
@@ -338,19 +345,23 @@ include_once "header.php";
 		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
 					<thead>
 						<tr role="row">
-							<th rowspan="1" colspan="1">Email</th>
+							
 							<th rowspan="1" colspan="1">Nombres</th>
 							<th rowspan="1" colspan="1">Apellidos</th>
-							<th rowspan="1" colspan="1">Edad</th>
-							<th rowspan="1" colspan="1">Ciudad</th>
-							
-							<th rowspan="1" colspan="1">Acciones</th>
+							<th rowspan="1" colspan="1">Fecha Nacimiento</th>
+              <th rowspan="1" colspan="1">Edad</th>
+              <th rowspan="1" colspan="1">Email</th>
+              <th rowspan="1" colspan="1">direccion</th>
+							<th rowspan="1" colspan="1">CC</th>
+							<th rowspan="1" colspan="1">Ahijado</th>
+							<th rowspan="1" colspan="1">Telefono</th>
+              <th rowspan="1" colspan="1">Acciones</th>
 						</tr>
 					</thead>
 									<tbody>
 <?php
-	$g =new GeneraHTMLAsistentes();
-	$g->crearTabla_asistentes();
+	$g =new GeneraHTMLhv();
+	$g->crearTabla_hv();
 ?>
 						
 			

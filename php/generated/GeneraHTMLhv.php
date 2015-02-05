@@ -24,7 +24,7 @@ class  GeneraHTMLhv{
 						echo "	<td>".$datos[$i]->nombres."</td>";
 						
 						echo "	<td>".$datos[$i]->apellidos."</td>";
-            echo "	<td>".$datos[$i]->fecha_nac."</td>";
+            echo "	<td>".$datos[$i]->fechaNac."</td>";
             echo "	<td>".$datos[$i]->edad."</td>";
             echo "	<td>".$datos[$i]->email."</td>";
             echo "	<td>".$datos[$i]->direccion."</td>";
@@ -37,10 +37,10 @@ class  GeneraHTMLhv{
 						
 							
 						echo "	<td>";
-						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->email."', '".$datos[$i]->nombres."', '".$datos[$i]->apellidos."', '".$datos[$i]->edad."','".$datos[$i]->ciudad."','".$datos[$i]->email."')\" ";
+						echo "		<img src='images/reload.png' alt='' " ;
+						echo " title='Editar' onclick=\"editar('".$datos[$i]->nombres."', '".$datos[$i]->apellidos."', '".$datos[$i]->fechaNac."', '".$datos[$i]->edad."','".$datos[$i]->email."','".$datos[$i]->direccion."','".$datos[$i]->cc."','".$datos[$i]->godson."','".$datos[$i]->telefono."', '".$datos[$i]->id."')\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarAsistente('".$datos[$i]->email."', 'lista_usuarios_".($i)."')\">";
+						echo "		<img src='images/delete-item.png' alt='' title='Eliminar' style='cursor: pointer;' onclick=\"eliminarHv('".$datos[$i]->id."', 'lista_usuarios_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";
