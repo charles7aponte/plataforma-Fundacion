@@ -16,7 +16,9 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 	public function load($email, $organizacionIdorganizacion){
 		$sql = 'SELECT * FROM asistente WHERE email = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($email);
+		//---se cambio setnumber a set
+    $sqlQuery->set($email);
+    //
 		$sqlQuery->setNumber($organizacionIdorganizacion);
 
 		return $this->getRow($sqlQuery);
@@ -49,8 +51,10 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 	public function delete($email, $organizacionIdorganizacion){
 		$sql = 'DELETE FROM asistente WHERE email = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
+    //se cambio setnumber a set 
 		$sqlQuery->set($email);
-		$sqlQuery->setNumber($organizacionIdorganizacion);
+		//
+    $sqlQuery->setNumber($organizacionIdorganizacion);
 
 		return $this->executeUpdate($sqlQuery);
 	}
@@ -69,9 +73,10 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 		$sqlQuery->set($asistente->edad);
 		$sqlQuery->set($asistente->ciudad);
 
-		
+		 //---se cambio setnumber a set 
 		$sqlQuery->set($asistente->email);
-
+     //
+    
 		$sqlQuery->setNumber($asistente->organizacionIdorganizacion);
 
 		$this->executeInsert($sqlQuery);	
@@ -85,8 +90,10 @@ class AsistenteMySqlDAO implements AsistenteDAO{
  	 * @param AsistenteMySql asistente
  	 */
 	public function update($asistente){
-		$sql = 'UPDATE asistente SET nombres = ?, apellidos = ?, edad = ?, ciudad = ? WHERE email = ?  AND organizacion_idorganizacion = ? ';
-		$sqlQuery = new SqlQuery($sql);
+		//---Se adiciono el parametro "$miemail"
+    $sql = 'UPDATE asistente SET nombres = ?, apellidos = ?, edad = ?, ciudad = ? ,email="'.$asistente->email2.'" WHERE email = ?  AND organizacion_idorganizacion = ? ';
+		//
+    $sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($asistente->nombres);
 		$sqlQuery->set($asistente->apellidos);
@@ -94,7 +101,7 @@ class AsistenteMySqlDAO implements AsistenteDAO{
 		$sqlQuery->set($asistente->ciudad);
 
 		
-		$sqlQuery->setNumber($asistente->email);
+		$sqlQuery->set($asistente->email);
 
 		$sqlQuery->setNumber($asistente->organizacionIdorganizacion);
 

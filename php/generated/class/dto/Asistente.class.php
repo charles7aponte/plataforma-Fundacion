@@ -8,11 +8,19 @@
 	class Asistente{
 		
 		var $email;
-		var $nombres;
-		var $apellidos;
-		var $edad;
-		var $ciudad;
-		var $organizacionIdorganizacion;
-		
+
+		var $nombres;
+
+		var $apellidos;
+
+		var $edad;
+
+		var $ciudad;
+
+		var $organizacionIdorganizacion;
+    
+    var $email2; //se agrego $email2 
+
+		
 	}
 ?>

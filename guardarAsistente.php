@@ -33,6 +33,10 @@ header('Location: hv_asistentes.php');
 	{
 	$guardarAsistentes->editarAsistente();
 	}
+  
+  header('Status: 301 Moved Permanently', false, 301);
+  header('Location: hv_asistentes.php');
+  exit();
 
 
 

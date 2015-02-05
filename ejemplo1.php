@@ -160,9 +160,9 @@ include_once "header.php";
 
 
 	
+	<!---style="border:1px solid white" --para bordear fieldset-->
 	
-	
-	<fieldset style="border:1px solid white"><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
+	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
       <form  name="frmRegistrar" id="frmRegistrar"
 	  
 	  action="ejemplo1F.php" method="POST"

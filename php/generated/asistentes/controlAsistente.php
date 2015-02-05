@@ -62,26 +62,29 @@
 		
 			if(isset($_POST['miid']))
 			{
-			$asistente=DAOFactory::getAsistenteDAO()->load($_POST['miid']);
+			$asistente=DAOFactory::getAsistenteDAO()->load($_POST['miid'],"0");
+      
+      
+      
             $email= $_POST['email'];
             $txtNombres= $_POST['txtNombres'];
             $txtApellidos= $_POST['txtApellidos'];
             $edad= $_POST['edad'];
             $ciudad= $_POST['ciudad'];
             
-
+            
 							
-            $asistente->email= $email;
-            $asistente->nombres= txtNombres;
+            $asistente->email2= $email;//se cambio email por email2
+            $asistente->nombres= $txtNombres;
             $asistente->apellidos= $txtApellidos;
             $asistente->edad=$edad;
             $asistente->ciudad=$ciudad;
            
-            $asistente->organizacionIdorganizacion=$organizacion_idorganizacion;
+            //$asistente->organizacionIdorganizacion=0;
 
 			
 				
-				DAOFactory::getAsistenteDAO()->update($asistente);
+				DAOFactory::getAsistenteDAO()->update($asistente,$email); //se agrego parametro email
 		
 			}
 		}

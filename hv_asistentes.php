@@ -159,6 +159,17 @@ include_once "header.php";
 	
       
       
+   	function nuevoElemento(){
+		
+		
+		document.getElementById('frmRegistrar').reset();
+		$("#btnProcesar").html("Agregar");
+		
+		$("#miaccion").val("agregar");
+		
+		return false;
+	}	
+	
       
  
     
@@ -317,7 +328,7 @@ include_once "header.php";
 	
 	
 	
-	<!---tabla--->
+	<!---tabla #1--->
 	<br />
 	<br />
 	<br />
@@ -354,7 +365,9 @@ include_once "header.php";
 
 	
 	
-	
+ 
+  
+  
 	
 	
 

@@ -5,12 +5,12 @@
   //include all DAO files
 	require_once('include_dao.php');
 
-class  GeneraHTMLAsistentes{
+class  GeneraHTMLhv{
 
 
-	public function crearTabla_asistentes(){
+	public function crearTabla_hv(){
 	
-		$datos=DAOFactory::getAsistenteDAO()->queryAll();
+		$datos=DAOFactory::getHojaDeVidaDAO()->queryAll();
 		
 		if(count($datos)>0)
 		{
@@ -20,12 +20,17 @@ class  GeneraHTMLAsistentes{
 												
 						echo "<tr role='row' class='odd' id='lista_usuarios_".($i)."'>";
 						//echo "	<td class='sorting_1'>".$datos[$i]->idelementos."</td>";
-						echo "	<td>".$datos[$i]->email."</td>";
+						
 						echo "	<td>".$datos[$i]->nombres."</td>";
 						
 						echo "	<td>".$datos[$i]->apellidos."</td>";
-						echo "	<td>".$datos[$i]->edad."</td>";
-						echo "	<td>".$datos[$i]->ciudad."</td>";
+            echo "	<td>".$datos[$i]->fecha_nac."</td>";
+            echo "	<td>".$datos[$i]->edad."</td>";
+            echo "	<td>".$datos[$i]->email."</td>";
+            echo "	<td>".$datos[$i]->direccion."</td>";
+            echo "	<td>".$datos[$i]->cc."</td>";
+            echo "	<td>".$datos[$i]->godson."</td>";
+						echo "	<td>".$datos[$i]->telefono."</td>";
             
            
 						
