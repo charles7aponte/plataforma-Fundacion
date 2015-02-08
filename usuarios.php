@@ -126,7 +126,7 @@ include_once "header.php";
 	
 	
 	
-	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
+	<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar usuario</h1></legend>
       <form name="frmRegistrar" id="frmRegistrar"
         action="guardarUsuario.php" method="POST"
 	  >

@@ -283,8 +283,9 @@ include_once "header.php";
 							<th rowspan="1" colspan="1">Categoria</th>
 							<th rowspan="1" colspan="1">Descripcion</th>
 							<th rowspan="1" colspan="1">Cantidad</th>
+              
 							
-							<th rowspan="1" colspan="1"></th>
+							<th rowspan="1" colspan="1">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>

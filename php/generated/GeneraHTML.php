@@ -43,10 +43,10 @@ class  GeneraHTML{
 						
 						if($datos[$i]->activo=="0")
 						{
-							$nombreActivo="No";
+							$nombreActivo="Inactivo";
 						}
 						else {
-							$nombreActivo="Si";
+							$nombreActivo="Activo";
 				
 						}
 						
@@ -59,9 +59,9 @@ class  GeneraHTML{
 							
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->cantidad."', '".$datos[$i]->precio."', '".$datos[$i]->descripcion."',".$datos[$i]->activo.",".$datos[$i]->categoria.",".$datos[$i]->idelementos.")\" ";
+						echo " title='Editar' onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->cantidad."', '".$datos[$i]->precio."', '".$datos[$i]->descripcion."',".$datos[$i]->activo.",".$datos[$i]->categoria.",".$datos[$i]->idelementos.")\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarElemento(".$datos[$i]->idelementos.",'lista_elementos_".($i)."')\">";
+						echo "		<img src='images/delete-item.png' alt='' title='Eliminar' style='cursor: pointer;' onclick=\"eliminarElemento(".$datos[$i]->idelementos.",'lista_elementos_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";

@@ -33,9 +33,9 @@ class  GeneraHTMLAsistentes{
 							
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->email."', '".$datos[$i]->nombres."', '".$datos[$i]->apellidos."', '".$datos[$i]->edad."','".$datos[$i]->ciudad."','".$datos[$i]->email."')\" ";
+						echo " title='Editar' onclick=\"editar('".$datos[$i]->email."', '".$datos[$i]->nombres."', '".$datos[$i]->apellidos."', '".$datos[$i]->edad."','".$datos[$i]->ciudad."','".$datos[$i]->email."')\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarAsistente('".$datos[$i]->email."', 'lista_usuarios_".($i)."')\">";
+						echo "		<img src='images/delete-item.png' alt='' title='Eliminar' style='cursor: pointer;' onclick=\"eliminarAsistente('".$datos[$i]->email."', 'lista_usuarios_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";

@@ -5,12 +5,12 @@
   //include all DAO files
 	require_once('include_dao.php');
 
-class  GeneraHTMLIngresos{
+class  GeneraHTMLEgresos{
 
 
-	public function crearTabla_ingresos(){
+	public function crearTabla_Egresos(){
 	
-		$datos=DAOFactory::getIngresosDAO()->queryAll();
+		$datos=DAOFactory::getEgresosDAO()->queryAll();
 
 		if(count($datos)>0)
 		{
@@ -22,7 +22,7 @@ class  GeneraHTMLIngresos{
 						echo "	<td>".$datos[$i]->ciudad."</td>";
 						echo "	<td>".$datos[$i]->fecha."</td>";
 						echo "	<td>".$datos[$i]->valor."</td>";
-						echo "	<td>".$datos[$i]->recibidoDe."</td>";
+						echo "	<td>".$datos[$i]->pagadoA."</td>";
 						echo "	<td>".$datos[$i]->conceptoDe."</td>";
 						echo "	<td>".$datos[$i]->modalidad."</td>";
 						echo "	<td>".$datos[$i]->beneficiario."</td>";
@@ -32,9 +32,9 @@ class  GeneraHTMLIngresos{
             			
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " title='editar' onclick=\"editar('".$datos[$i]->ciudad."', '".$datos[$i]->fecha."', '".$datos[$i]->valor."', '".$datos[$i]->recibidoDe."', '".$datos[$i]->conceptoDe."', '".$datos[$i]->modalidad."',  '".$datos[$i]->beneficiario."',  '".$datos[$i]->cc."', '".$datos[$i]->aprobado."', ".$datos[$i]->idingresos.")\" ";
+						echo " title='editar' onclick=\"editar('".$datos[$i]->ciudad."', '".$datos[$i]->fecha."', '".$datos[$i]->valor."', '".$datos[$i]->pagadoA."', '".$datos[$i]->conceptoDe."', '".$datos[$i]->modalidad."',  '".$datos[$i]->beneficiario."',  '".$datos[$i]->cc."', '".$datos[$i]->aprobado."', ".$datos[$i]->idegresos.")\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' title='eliminar' style='cursor: pointer;' onclick=\"eliminarIngreso(".$datos[$i]->idingresos.",'lista_usuarios_".($i)."')\">";
+						echo "		<img src='images/delete-item.png' alt='' title='eliminar' style='cursor: pointer;' onclick=\"eliminarIngreso(".$datos[$i]->idegresos.",'lista_usuarios_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";
@@ -54,4 +54,4 @@ class  GeneraHTMLIngresos{
 	}//fin de clase
 	
 	
-	?>
+	?>  

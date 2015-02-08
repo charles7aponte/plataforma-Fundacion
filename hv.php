@@ -119,7 +119,7 @@ include_once "header.php";
       
       
       
-      function editar(nombres, apellidos,fechaNac, edad, email, direccion, cc, godson, telefono, miid){
+      function editar(nombres, apellidos, fechaNac, edad, email, direccion, cc, godson, telefono, miid){
 				//procedimiento = "editar";
 			
                 
@@ -201,7 +201,7 @@ include_once "header.php";
    <?php
     }
     ?>
-      <form name="frmRegistrar" id="frmRegistrar"  action="guardarAsistente.php" method="POST" class="form-horizontal">
+      <form name="frmRegistrar" id="frmRegistrar"  action="guardarHv.php" method="POST" class="form-horizontal">
           <input type="hidden" id="accion" value="hv">
           
           <input type="hidden" name="accion" id="miaccion" value="agregar">
@@ -218,7 +218,7 @@ include_once "header.php";
                        <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
+                          <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombres">
                         </div>
                 </div>
 				
@@ -226,7 +226,7 @@ include_once "header.php";
                        <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha de nacimiento:</label>
                     
                         <div class="col-sm-9">
-                          <input type="date"  name="p_fecha_nacimiento" class ="form-control"  placeholder="Fecha de nacimiento">
+                          <input type="date"  name="p_fecha_nacimiento" class ="form-control" id="p_fecha_nacimiento" placeholder="Fecha de nacimiento">
                         </div>
                 </div>
 				
@@ -242,7 +242,7 @@ include_once "header.php";
                        <label for="cc" class="col-sm-3 control-label">CC :</label>
                     
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="cc" name="cc" placeholder="12345">
+                          <input type="text" class="form-control" id="cc" name="cc" placeholder="CC">
                         </div>
                  </div>
 				  
@@ -254,7 +254,7 @@ include_once "header.php";
                         </div>
 				</div>
 
-					
+				<!---	
 				<div class="form-group" id="p_ciudad">                    
                        <label for="ciudad" class="col-sm-3 control-label">Ciudad:</label>
                     
@@ -262,6 +262,7 @@ include_once "header.php";
                           <input type="text"  name="ciudad" class ="form-control validate[required,custom[onlyLetterSp]" id="ciudad" placeholder="Ciudad">
                         </div>
                 </div>
+        -->
 					
 				
                 
@@ -300,10 +301,10 @@ include_once "header.php";
                   </div>
                   
                   <div class="form-group" id="p_godson">                    
-						   <label for="godson" class="col-sm-3 control-label">Godson:</label>
+						   <label for="godson" class="col-sm-3 control-label">Ahijado:</label>
 						
 							<div class="col-sm-9">
-							  <input type="text"  name="godson" class ="form-control validate[required,custom[onlyLetterSp]" id="godson" placeholder="Godson">
+							  <input type="text"  name="godson" class ="form-control validate[required,custom[onlyLetterSp]" id="godson" placeholder="Ahijado">
 							</div>
 					</div>
 					

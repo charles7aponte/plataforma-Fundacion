@@ -27,10 +27,10 @@ class  GeneraHTMLUsuarios{
             
             if($datos[$i]->activo=="0")
 						{
-							$nombreActivo="No";
+							$nombreActivo="Inactivo";
 						}
 						else {
-							$nombreActivo="Si";
+							$nombreActivo="Activo";
 				
 						}
 						
@@ -38,9 +38,9 @@ class  GeneraHTMLUsuarios{
 							
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->apellido."', '".$datos[$i]->usuario."', '".$datos[$i]->clave."',".$datos[$i]->activo.", ".$datos[$i]->idusuario.")\" ";
+						echo " title='Editar' onclick=\"editar('".$datos[$i]->nombre."', '".$datos[$i]->apellido."', '".$datos[$i]->usuario."', '".$datos[$i]->clave."',".$datos[$i]->activo.", ".$datos[$i]->idusuario.")\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' style='cursor: pointer;' onclick=\"eliminarUsuario(".$datos[$i]->idusuario.",'lista_usuarios_".($i)."')\">";
+						echo "		<img src='images/delete-item.png' alt='' title='Eliminar' style='cursor: pointer;' onclick=\"eliminarUsuario(".$datos[$i]->idusuario.",'lista_usuarios_".($i)."')\">";
 
 						echo "	</td>";
 						echo "  </tr>";

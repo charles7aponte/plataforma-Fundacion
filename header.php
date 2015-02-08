@@ -67,7 +67,7 @@ padding-top: 0px;">
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav" style="float: right;">
             <li class="active"><a href="ejemplo1.php">Inventario</a></li>
-            <li><a href="egresos.php">Ingresos/Egresos</a></li>
+            <li><a href="ingresos.php">Ingresos/Egresos</a></li>
             <li><a href="hv.php">HV/Asistentes</a></li>
             <li><a href="usuarios.php">Usuarios</a></li>
             <li class="dropdown">

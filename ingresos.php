@@ -3,8 +3,6 @@
 
 include_once "php/generated/GeneraHTMLIngresos.php";
 include_once "php/generated/ingresos/controlIngreso.php";
-include_once "php/generated/GeneraHTMLEgresos.php";
-include_once "php/generated/egresos/controlEgreso.php";
 include_once "header.php";
 
 ?>
@@ -82,7 +80,7 @@ include_once "header.php";
 					var ced ="id="+idingresos;
 					$.ajax({ 
 						type: "POST",
-						url:"php/generated/egresos/eliminarEgreso.php",
+						url:"php/generated/ingresos/eliminarIngreso.php",
 						data: ced,
 						success:function(respuesta)
 								{
@@ -106,14 +104,14 @@ include_once "header.php";
 
 
      
-  function editar(ciudad, fecha, valor, pagadoA, conceptoDe, modalidad, beneficiario, cc, aprobado, miid){
+  function editar(ciudad, fecha, valor, recibidoDe, conceptoDe, modalidad, beneficiario, cc, aprobado, miid){
 				//procedimiento = "editar";
 			
 
 								$('#ciudad').val(ciudad);
 								$('#fecha').val(fecha);
                 $('#valor').val(valor);
-                $('#pagado_a').val(pagadoA);
+                $('#recibido').val(recibidoDe);
                 $('#concepto').val(conceptoDe);
                 $('#modalidad').val(modalidad);
                 $('#beneficiario').val(beneficiario);
@@ -143,7 +141,7 @@ include_once "header.php";
 
  
   function nuevoElemento(){
-      
+		
 		
 		document.getElementById('frmRegistrar').reset();
 		$("#btnProcesar").html("Agregar");
@@ -162,14 +160,14 @@ include_once "header.php";
 
 
 
-<ul class="nav nav-pills">  
-    <li id="b_ingreso"  onclick="valorPest('Ingreso')" data-contenido="Ingreso"><a href="ingresos.php">Ingreso</a></li>
-    <li id="b_egreso"   onclick="valorPest('Egreso')" data-contenido="Egreso" class="active"><a href="#">Egreso</a></li>
+<ul class="nav nav-pills">
+    <li id="b_ingreso"  onclick="valorPest('Ingreso')" data-contenido="Ingreso" class="active"><a href="#">Ingreso</a></li>
+    <li id="b_egreso"   onclick="valorPest('Egreso')" data-contenido="Egreso"><a href="egresos.php">Egreso</a></li>
 </ul>
 
 
-<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar egreso</h1></legend>
-  <form name="frmRegistrar" id="frmRegistrar" action="guardarEgreso.php" method="POST" class="form-horizontal">
+<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar ingreso</h1></legend>
+  <form name="frmRegistrar" id="frmRegistrar" action="guardarIngreso.php" method="POST" class="form-horizontal">
           <input type="hidden" id="accion" value="ingreso">
           
           <input type="hidden" name="accion" id="miaccion" value="agregar">
@@ -242,10 +240,10 @@ include_once "header.php";
                   
                   
                     <div class="form-group">                    
-                       <label for="pagado_a" class="col-sm-3 control-label">Pagado a:</label>
+                       <label for="recibido" class="col-sm-3 control-label">Recibido de:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="pagado_a" name="pagado_a" placeholder="Pagado a">
+                          <input type="text" class="form-control" id="recibido" name="recibido" placeholder="Recibido de">
                         </div>
                   </div>
                   
@@ -325,22 +323,22 @@ include_once "header.php";
 							<th rowspan="1" colspan="1">Fecha</th>
 							
 							<th rowspan="1" colspan="1">Valor</th>
-							<th rowspan="1" colspan="1">Pagado a</th>
+							<th rowspan="1" colspan="1">Recibido de</th>
 							<th rowspan="1" colspan="1">Por concepto</th>
 							<th rowspan="1" colspan="1">Modalidad</th>
 							<th rowspan="1" colspan="1">Beneficiario</th>
 							<th rowspan="1" colspan="1">CC o NIT</th>
 							<th rowspan="1" colspan="1">Aprobado por</th>
-							
+              
 							<th rowspan="1" colspan="1">Acciones</th>
 						</tr>
 					</thead>
 					<tbody>
 
 					<?php
-					$g =new GeneraHTMLEgresos();
+					$g =new GeneraHTMLIngresos();
 
-					$g->crearTabla_egresos();
+					$g->crearTabla_ingresos();
 					?>
 			
 
