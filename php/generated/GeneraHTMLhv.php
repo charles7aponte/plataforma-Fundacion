@@ -25,9 +25,9 @@ class  GeneraHTMLhv{
 						
 						echo "	<td>".$datos[$i]->apellidos."</td>";
             echo "	<td>".$datos[$i]->fechaNac."</td>";
-            echo "	<td>".$datos[$i]->edad."</td>";
+            //echo "	<td>".$datos[$i]->edad."</td>";
             echo "	<td>".$datos[$i]->email."</td>";
-            echo "	<td>".$datos[$i]->direccion."</td>";
+            //echo "	<td>".$datos[$i]->direccion."</td>";
             echo "	<td>".$datos[$i]->cc."</td>";
             echo "	<td>".$datos[$i]->godson."</td>";
 						echo "	<td>".$datos[$i]->telefono."</td>";

@@ -18,6 +18,6 @@ $guardarIngreso = new controlIngreso();
 	}
 
 	header('Status: 301 Moved Permanently', false, 301);
-header('Location: ingresos.php');
+  header('Location: ingresos.php');
 exit();
 ?>

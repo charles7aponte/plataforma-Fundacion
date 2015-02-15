@@ -3,7 +3,7 @@
  * Class that operate on table 'usuario'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-04 22:29
+ * @date: 2015-02-13 23:50
  */
 class UsuarioMySqlDAO implements UsuarioDAO{
 
@@ -64,7 +64,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 		$sqlQuery->set($usuario->apellido);
 		$sqlQuery->set($usuario->usuario);
 		$sqlQuery->set($usuario->clave);
-		$sqlQuery->set($usuario->activo);
+		$sqlQuery->setNumber($usuario->activo);
 		$sqlQuery->setNumber($usuario->organizacionIdorganizacion);
 
 		$id = $this->executeInsert($sqlQuery);	
@@ -85,7 +85,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 		$sqlQuery->set($usuario->apellido);
 		$sqlQuery->set($usuario->usuario);
 		$sqlQuery->set($usuario->clave);
-		$sqlQuery->set($usuario->activo);
+		$sqlQuery->setNumber($usuario->activo);
 		$sqlQuery->setNumber($usuario->organizacionIdorganizacion);
 
 		$sqlQuery->setNumber($usuario->idusuario);
@@ -132,7 +132,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	public function queryByActivo($value){
 		$sql = 'SELECT * FROM usuario WHERE activo = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
@@ -175,7 +175,7 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 	public function deleteByActivo($value){
 		$sql = 'DELETE FROM usuario WHERE activo = ?';
 		$sqlQuery = new SqlQuery($sql);
-		$sqlQuery->set($value);
+		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
 	}
 

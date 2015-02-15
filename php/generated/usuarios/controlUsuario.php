@@ -33,7 +33,7 @@
 			$usuario->nombre= $txtNombres;
 			$usuario->apellido= $txtApellidos;
 			$usuario->usuario=$usuario1;
-			$usuario->activo=$activo;
+			$usuario->activo= $activo;
 			$usuario->clave=$clave;
 			$usuario->organizacionIdorganizacion=$organizacion_idorganizacion;
 			
@@ -61,8 +61,8 @@
 		
 			if(isset($_POST['miid']))
 			{
-			$usuario=DAOFactory::getUsuarioDAO()->load($_POST['miid']);
-			$txtNombres= $_POST['txtNombres'];
+            $usuario=DAOFactory::getUsuarioDAO()->load($_POST['miid']);
+            $txtNombres= $_POST['txtNombres'];
             $txtApellidos= $_POST['txtApellidos'];
             $usuario1= $_POST['usuario'];
             $activo= $_POST['activo'];

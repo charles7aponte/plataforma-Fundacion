@@ -14,6 +14,10 @@ include_once "header.php";
         
     }
     
+     .mifecha{
+      cursor:pointer !important;
+    }
+    
     
 </style>
 <script src="js/jquery.validationEngine-es.js" type="text/javascript" charset="utf-8"></script>
@@ -24,6 +28,7 @@ include_once "header.php";
 
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 <link rel="stylesheet" href="css/datepicker.css" type="text/css"/>
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
 
 <script>
     
@@ -75,49 +80,54 @@ include_once "header.php";
   function eliminarIngreso(idingresos, id){
  
 
-				if (confirm("Esta seguro de eliminar?")) {
-					//id es igual
-					var ced ="id="+idingresos;
-					$.ajax({ 
-						type: "POST",
-						url:"php/generated/ingresos/eliminarIngreso.php",
-						data: ced,
-						success:function(respuesta)
-								{
-									console.log(respuesta);
-									
-									
-									if(respuesta=="1")
-									{
-										
-									 $("#"+id).remove();
-									 
-									}
-								//	location.reload(true);
-								}
-					});
-				    
-				}	
+	if (confirm("Esta seguro de eliminar?")) {
+            //id es igual
+            var ced ="id="+idingresos;
+            $.ajax({ 
+              type: "POST",
+              url:"php/generated/ingresos/eliminarIngreso.php",
+              data: ced,
+              success:function(respuesta)
+                              {
+                console.log(respuesta);
+                if(respuesta=="1")
+                                      {
+                                           $("#"+id).remove();
+
+                                      }
+                                      //	location.reload(true);
+                          }
+                                      });
+
+                  }	
 			}
       
       
 
 
      
-  function editar(ciudad, fecha, valor, recibidoDe, conceptoDe, modalidad, beneficiario, cc, aprobado, miid){
+  function editar(ciudad, fecha, valor, recibidoDe, conceptoDe, modalidad, beneficiario, cc, formaPago, aprobado, miid){
 				//procedimiento = "editar";
 			
-
-								$('#ciudad').val(ciudad);
-								$('#fecha').val(fecha);
+                $("#titulo").html("Editar ingreso");
+                $('#ciudad').val(ciudad);
+                $('#fecha').val(fecha);
                 $('#valor').val(valor);
                 $('#recibido').val(recibidoDe);
                 $('#concepto').val(conceptoDe);
                 $('#modalidad').val(modalidad);
                 $('#beneficiario').val(beneficiario);
-								$('#cc').val(cc);
-								$('#aprobado').val(aprobado);
-								$("#miid").val(miid);
+                $('#cc').val(cc);
+                $('#aprobado').val(aprobado);
+                $("#miid").val(miid);
+                
+                if(formaPago==1){
+                  document.getElementById("si").checked=true;
+                }
+                else if(formaPago==0){
+                  document.getElementById("no").checked=true;
+                }
+
                 ////$('#descripcion').val(descripcion);
 								//$('#precio').val(precio);
 								
@@ -126,10 +136,10 @@ include_once "header.php";
 								
 								
 								
-								$("#btnProcesar").html("Editar");
+		$("#btnProcesar").html("Editar");
 								
 								
-								$("#miaccion").val("editar");
+		$("#miaccion").val("editar");
 
 								
 								//cambioCategoriById(categoria);
@@ -145,6 +155,7 @@ include_once "header.php";
 		
 		document.getElementById('frmRegistrar').reset();
 		$("#btnProcesar").html("Agregar");
+                $("#titulo").html("Agregar ingreso");
 		
 		$("#miaccion").val("agregar");
 		
@@ -182,7 +193,7 @@ include_once "header.php";
                        <label for="ciudad" class="col-sm-3 control-label">Ciudad:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="ciudad" class="form-control" id="ciudad" placeholder="ciudad">
+                          <input type="text"  name="ciudad" class="form-control validate[required,custom[onlyLetterSp]" id="ciudad" placeholder="ciudad">
                         </div>
                   </div>
                   
@@ -191,7 +202,7 @@ include_once "header.php";
                        <label for="concepto" class="col-sm-3 control-label">Por concepto:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="concepto" name="concepto" placeholder="Por concepto de">
+                          <input type="text" class="form-control validate[required,custom[onlyLetterSp]" id="concepto" name="concepto" placeholder="Por concepto de">
                         </div>
                   </div>
                   
@@ -200,7 +211,7 @@ include_once "header.php";
                        <label for="beneficiario" class="col-sm-3 control-label">Beneficiario:</label>
                     
                         <div class="col-sm-9">
-                          <input type="email" class="form-control" id="beneficiario" name="beneficiario" placeholder="Beneficiario">
+                          <input type="beneficiario" class="form-control validate[required,[onlyLetterSp]" id="beneficiario"  name="beneficiario" placeholder="Beneficiario">
                         </div>
                   </div>
                   
@@ -208,10 +219,10 @@ include_once "header.php";
                   
                   
                 <div class="form-group">                    
-                       <label for="modalidad" class="col-sm-3 control-label">Modalidad</label>
+                       <label for="modalidad" class="col-sm-3 control-label">Elaborado por:</label>
                     
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="modalidad" name="modalidad" placeholder="Modalidad">
+                            <input type="text" class="form-control validate[required,custom[onlyLetterSp]" id="modalidad" name="modalidad" placeholder="Elaborado por">
                         </div>
                   </div>
               
@@ -221,7 +232,7 @@ include_once "header.php";
                        <label for="aprobado" class="col-sm-3 control-label">Aprobado por:</label>
                     
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="aprobado" name="aprobado" placeholder="Aprobado por" >
+                            <input type="text" class="form-control validate[required,custom[onlyLetterSp]" id="aprobado" name="aprobado" placeholder="Aprobado por" >
                         </div>
                   </div>
               </div>
@@ -234,7 +245,7 @@ include_once "header.php";
                        <label for="valor" class="col-sm-3 control-label">Valor:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="valor" class="form-control" id="valor" placeholder="Valor" >
+                            <input type="number"  name="valor" class="form-control validate[required,custom[onlyNumberSp]" id="valor" placeholder="Valor" >
                         </div>
                   </div>
                   
@@ -243,7 +254,7 @@ include_once "header.php";
                        <label for="recibido" class="col-sm-3 control-label">Recibido de:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text" class="form-control" id="recibido" name="recibido" placeholder="Recibido de">
+                          <input type="text" class="form-control validate[required,custom[onlyLetterSp]" id="recibido" name="recibido" placeholder="Recibido de">
                         </div>
                   </div>
                   
@@ -252,36 +263,36 @@ include_once "header.php";
                        <label for="cc" class="col-sm-3 control-label">CC o NIT:</label>
                     
                         <div class="col-sm-9">
-                          <input type="email" class="form-control" id="cc" name="cc" placeholder="CC">
+                          <input type="email" class="form-control validate[required]" id="cc" name="cc" placeholder="CC">
                         </div>
                   </div>
+                  
+                  <div class="form-group">
+                    <label for="activo" class="col-sm-3 control-label">Forma de pago:</label>
+                    <input type="radio" name="activo" value="1"  id="si" checked/>Efectivo
+                    <input type="radio" name="activo"  value="0" id="no"/>Cheque<br />	
+                  </div>
                 
+                <!---
+                  <div class="form-group" id="fecha">                    
+                         <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha:</label>
+
+                          <div class="col-sm-9">
+                            <input type="date"  name="fecha" class ="form-control validate[required]" id="fecha" placeholder="Fecha">
+                          </div>
+                  </div>
                 
-                <div class="form-group" id="fecha">                    
-                       <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha:</label>
-                    
+                ---->
+                  
+                  <div class="form-group" >                    
+                    <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha:</label>
                         <div class="col-sm-9">
-                          <input type="date"  name="fecha" class ="form-control" id="fecha" placeholder="Fecha">
+                          <input type="text"  name="fecha"
+                                 readonly="readonly"    class ="form-control validate[required] mifecha" id="fecha" placeholder="Fecha">
                         </div>
                 </div>
-
                   
-                <!--otro tipo de fecha
-                
-                  <div class="form-group">                    
-                       <label for="fecha" class="col-sm-3 control-label">Fecha:</label>
-                    
-                        <div class="col-sm-5">
-                            
-                            <input type="" style="cursor:pointer" 
-                                            readonly id="fecha-proyecto" class="date form-control" data-format="dd/MM/yyyy" name="fecha" value="dd/mm/aaaa"  /> 
-
-                            
-                        
-                        </div>
-                  </div>
-                  
-                  -->
+             
                 
               </div>
               
@@ -319,16 +330,17 @@ include_once "header.php";
 					<thead>
 						<tr role="row">
 							
-							<th rowspan="1" colspan="1">Ciudad</th>
+							<!--<th rowspan="1" colspan="1">Ciudad</th>-->
 							<th rowspan="1" colspan="1">Fecha</th>
 							
 							<th rowspan="1" colspan="1">Valor</th>
-							<th rowspan="1" colspan="1">Recibido de</th>
 							<th rowspan="1" colspan="1">Por concepto</th>
-							<th rowspan="1" colspan="1">Modalidad</th>
-							<th rowspan="1" colspan="1">Beneficiario</th>
+              <th rowspan="1" colspan="1">Recibido de</th>
+							<!--<th rowspan="1" colspan="1">Elaborado por</th>-->
 							<th rowspan="1" colspan="1">CC o NIT</th>
-							<th rowspan="1" colspan="1">Aprobado por</th>
+              <!--<th rowspan="1" colspan="1">Beneficiario</th>-->
+							<th rowspan="1" colspan="1">Forma de pago</th>
+							<!--<th rowspan="1" colspan="1">Aprobado por</th>-->
               
 							<th rowspan="1" colspan="1">Acciones</th>
 						</tr>
@@ -354,7 +366,13 @@ include_once "header.php";
 
 	
 	
-	
+
+<button  
+	id="generar_ingreso" onclick="generar()"
+	type="button" class="btn btn-primary" style="margin-left: 100px;">
+	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnGenerar">Generar reporte</b>
+	</button>
+        </br></br></br></br>	
 	
 	
 	
@@ -366,7 +384,7 @@ include_once "header.php";
 <script>
 $("#frmRegistrar").validationEngine();
  
-$('.date').datepicker({language:"es"});
+$('.mifecha').datepicker({language:"es", format: 'yyyy-mm-dd'});
 
 
 

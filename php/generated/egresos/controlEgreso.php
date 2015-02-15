@@ -21,6 +21,7 @@
       $modalidad= $_POST['modalidad'];
       $beneficiario= $_POST['beneficiario'];
       $cc= $_POST['cc'];
+      $activo=$_POST['activo'];
 			$aprobado= $_POST['aprobado'];
 			$organizacion_idorganizacion= $_POST['organizacion_idorganizacion'];
 			
@@ -42,6 +43,7 @@
 			$egreso->modalidad= $modalidad;
       $egreso->beneficiario= $beneficiario;
       $egreso->cc= $cc;
+      $egreso->formaPago= $activo;
       $egreso->aprobado= $aprobado;
 			$egreso->organizacionIdorganizacion=$organizacion_idorganizacion;
 			
@@ -69,7 +71,7 @@
 		
 			if(isset($_POST['miid']))
 			{
-			$usuario=DAOFactory::getEgresosDAO()->load($_POST['miid']);
+			$egreso=DAOFactory::getEgresosDAO()->load($_POST['miid']);
 			
             $ciudad= $_POST['ciudad'];
             $fecha= $_POST['fecha'];
@@ -79,6 +81,7 @@
             $modalidad= $_POST['modalidad'];
             $beneficiario= $_POST['beneficiario'];
             $cc= $_POST['cc'];
+            $activo=$_POST['activo'];
             $aprobado= $_POST['aprobado'];
             
 
@@ -93,8 +96,9 @@
             $egreso->modalidad= $modalidad;
             $egreso->beneficiario= $beneficiario;
             $egreso->cc= $cc;
+            $egreso->formaPago= $activo;
             $egreso->aprobado= $aprobado;
-            $egreso->organizacionIdorganizacion=$organizacion_idorganizacion;
+            $egreso->organizacionIdorganizacion=0;
 
 			
 				

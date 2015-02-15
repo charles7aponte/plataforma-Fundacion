@@ -84,17 +84,17 @@ table.dataTable.cell-border tbody tr:first-child td {
   border-top: none;
 }
 table.dataTable.stripe tbody tr.odd, table.dataTable.display tbody tr.odd {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9;// f9f9f9 aqui cambia color tabla
 }
 table.dataTable.stripe tbody tr.odd.selected, table.dataTable.display tbody tr.odd.selected {
-  background-color: #abb9d3;
+  background-color: #abb9d3; 
 }
 table.dataTable.hover tbody tr:hover,
 table.dataTable.hover tbody tr.odd:hover,
 table.dataTable.hover tbody tr.even:hover, table.dataTable.display tbody tr:hover,
 table.dataTable.display tbody tr.odd:hover,
 table.dataTable.display tbody tr.even:hover {
-  background-color: whitesmoke;
+  background-color: whitesmoke; //whitesmoke aqui cambia color tabla
 }
 table.dataTable.hover tbody tr:hover.selected,
 table.dataTable.hover tbody tr.odd:hover.selected,
@@ -118,13 +118,13 @@ table.dataTable.display tbody tr.selected > .sorting_3 {
   background-color: #acbad4;
 }
 table.dataTable.display tbody tr.odd > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd > .sorting_1 {
-  background-color: #f1f1f1;
+  background-color: #f1f1f1;//f1f1f1 secambio color tabla
 }
 table.dataTable.display tbody tr.odd > .sorting_2, table.dataTable.order-column.stripe tbody tr.odd > .sorting_2 {
   background-color: #f3f3f3;
 }
 table.dataTable.display tbody tr.odd > .sorting_3, table.dataTable.order-column.stripe tbody tr.odd > .sorting_3 {
-  background-color: whitesmoke;
+  background-color: whitesmoke;//whitesmoke aqui cambia color tabla
 }
 table.dataTable.display tbody tr.odd.selected > .sorting_1, table.dataTable.order-column.stripe tbody tr.odd.selected > .sorting_1 {
   background-color: #a6b3cd;
@@ -136,7 +136,7 @@ table.dataTable.display tbody tr.odd.selected > .sorting_3, table.dataTable.orde
   background-color: #a9b6d0;
 }
 table.dataTable.display tbody tr.even > .sorting_1, table.dataTable.order-column.stripe tbody tr.even > .sorting_1 {
-  background-color: #f9f9f9;
+  background-color: #f9f9f9;//f9f9f9 secambio color tabla
 }
 table.dataTable.display tbody tr.even > .sorting_2, table.dataTable.order-column.stripe tbody tr.even > .sorting_2 {
   background-color: #fbfbfb;
@@ -158,7 +158,7 @@ table.dataTable.display tbody tr.odd:hover > .sorting_1,
 table.dataTable.display tbody tr.even:hover > .sorting_1, table.dataTable.order-column.hover tbody tr:hover > .sorting_1,
 table.dataTable.order-column.hover tbody tr.odd:hover > .sorting_1,
 table.dataTable.order-column.hover tbody tr.even:hover > .sorting_1 {
-  background-color: #eaeaea;
+  background-color: #eaeaea;//eaeaea secambio color tabla
 }
 table.dataTable.display tbody tr:hover > .sorting_2,
 table.dataTable.display tbody tr.odd:hover > .sorting_2,
@@ -196,7 +196,7 @@ table.dataTable.order-column.hover tbody tr.even:hover.selected > .sorting_3 {
   background-color: #a4b2cb;
 }
 table.dataTable.no-footer {
-  border-bottom: 1px solid #111111;
+  border-bottom: 1px solid #111111;//linea inferior negra
 }
 table.dataTable.nowrap th, table.dataTable.nowrap td {
   white-space: nowrap;

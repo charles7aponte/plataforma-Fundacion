@@ -3,7 +3,7 @@
  * Class that operate on table 'egresos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-04 22:29
+ * @date: 2015-02-13 23:50
  */
 class EgresosMySqlDAO implements EgresosDAO{
 
@@ -57,7 +57,7 @@ class EgresosMySqlDAO implements EgresosDAO{
  	 * @param EgresosMySql egreso
  	 */
 	public function insert($egreso){
-		$sql = 'INSERT INTO egresos (ciudad, fecha, valor, pagado_a, concepto_de, modalidad, beneficiario, cc, aprobado, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO egresos (ciudad, fecha, valor, pagado_a, concepto_de, modalidad, beneficiario, cc, forma_pago, aprobado, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($egreso->ciudad);
@@ -68,6 +68,7 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$sqlQuery->set($egreso->modalidad);
 		$sqlQuery->set($egreso->beneficiario);
 		$sqlQuery->set($egreso->cc);
+		$sqlQuery->setNumber($egreso->formaPago);
 		$sqlQuery->set($egreso->aprobado);
 		$sqlQuery->setNumber($egreso->organizacionIdorganizacion);
 
@@ -82,7 +83,7 @@ class EgresosMySqlDAO implements EgresosDAO{
  	 * @param EgresosMySql egreso
  	 */
 	public function update($egreso){
-		$sql = 'UPDATE egresos SET ciudad = ?, fecha = ?, valor = ?, pagado_a = ?, concepto_de = ?, modalidad = ?, beneficiario = ?, cc = ?, aprobado = ?, organizacion_idorganizacion = ? WHERE idegresos = ?';
+		$sql = 'UPDATE egresos SET ciudad = ?, fecha = ?, valor = ?, pagado_a = ?, concepto_de = ?, modalidad = ?, beneficiario = ?, cc = ?, forma_pago = ?, aprobado = ?, organizacion_idorganizacion = ? WHERE idegresos = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($egreso->ciudad);
@@ -93,6 +94,7 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$sqlQuery->set($egreso->modalidad);
 		$sqlQuery->set($egreso->beneficiario);
 		$sqlQuery->set($egreso->cc);
+		$sqlQuery->setNumber($egreso->formaPago);
 		$sqlQuery->set($egreso->aprobado);
 		$sqlQuery->setNumber($egreso->organizacionIdorganizacion);
 
@@ -162,6 +164,13 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$sql = 'SELECT * FROM egresos WHERE cc = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByFormaPago($value){
+		$sql = 'SELECT * FROM egresos WHERE forma_pago = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
 	}
 
@@ -236,6 +245,13 @@ class EgresosMySqlDAO implements EgresosDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByFormaPago($value){
+		$sql = 'DELETE FROM egresos WHERE forma_pago = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 	public function deleteByAprobado($value){
 		$sql = 'DELETE FROM egresos WHERE aprobado = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -269,6 +285,7 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$egreso->modalidad = $row['modalidad'];
 		$egreso->beneficiario = $row['beneficiario'];
 		$egreso->cc = $row['cc'];
+		$egreso->formaPago = $row['forma_pago'];
 		$egreso->aprobado = $row['aprobado'];
 		$egreso->organizacionIdorganizacion = $row['organizacion_idorganizacion'];
 

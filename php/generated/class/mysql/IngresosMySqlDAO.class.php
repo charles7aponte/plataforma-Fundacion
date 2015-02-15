@@ -3,7 +3,7 @@
  * Class that operate on table 'ingresos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-04 22:29
+ * @date: 2015-02-13 23:50
  */
 class IngresosMySqlDAO implements IngresosDAO{
 
@@ -61,7 +61,7 @@ class IngresosMySqlDAO implements IngresosDAO{
  	 * @param IngresosMySql ingreso
  	 */
 	public function insert($ingreso){
-		$sql = 'INSERT INTO ingresos (ciudad, fecha, valor, recibido_de, concepto_de, modalidad, beneficiario, cc, aprobado, idingresos, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO ingresos (ciudad, fecha, valor, recibido_de, concepto_de, modalidad, beneficiario, cc, forma_pago, aprobado, idingresos, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($ingreso->ciudad);
@@ -72,6 +72,7 @@ class IngresosMySqlDAO implements IngresosDAO{
 		$sqlQuery->set($ingreso->modalidad);
 		$sqlQuery->set($ingreso->beneficiario);
 		$sqlQuery->set($ingreso->cc);
+		$sqlQuery->setNumber($ingreso->formaPago);
 		$sqlQuery->set($ingreso->aprobado);
 
 		
@@ -90,7 +91,7 @@ class IngresosMySqlDAO implements IngresosDAO{
  	 * @param IngresosMySql ingreso
  	 */
 	public function update($ingreso){
-		$sql = 'UPDATE ingresos SET ciudad = ?, fecha = ?, valor = ?, recibido_de = ?, concepto_de = ?, modalidad = ?, beneficiario = ?, cc = ?, aprobado = ? WHERE idingresos = ?  AND organizacion_idorganizacion = ? ';
+		$sql = 'UPDATE ingresos SET ciudad = ?, fecha = ?, valor = ?, recibido_de = ?, concepto_de = ?, modalidad = ?, beneficiario = ?, cc = ?, forma_pago = ?, aprobado = ? WHERE idingresos = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($ingreso->ciudad);
@@ -101,6 +102,7 @@ class IngresosMySqlDAO implements IngresosDAO{
 		$sqlQuery->set($ingreso->modalidad);
 		$sqlQuery->set($ingreso->beneficiario);
 		$sqlQuery->set($ingreso->cc);
+		$sqlQuery->setNumber($ingreso->formaPago);
 		$sqlQuery->set($ingreso->aprobado);
 
 		
@@ -176,6 +178,13 @@ class IngresosMySqlDAO implements IngresosDAO{
 		return $this->getList($sqlQuery);
 	}
 
+	public function queryByFormaPago($value){
+		$sql = 'SELECT * FROM ingresos WHERE forma_pago = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
 	public function queryByAprobado($value){
 		$sql = 'SELECT * FROM ingresos WHERE aprobado = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -240,6 +249,13 @@ class IngresosMySqlDAO implements IngresosDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByFormaPago($value){
+		$sql = 'DELETE FROM ingresos WHERE forma_pago = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 	public function deleteByAprobado($value){
 		$sql = 'DELETE FROM ingresos WHERE aprobado = ?';
 		$sqlQuery = new SqlQuery($sql);
@@ -266,6 +282,7 @@ class IngresosMySqlDAO implements IngresosDAO{
 		$ingreso->modalidad = $row['modalidad'];
 		$ingreso->beneficiario = $row['beneficiario'];
 		$ingreso->cc = $row['cc'];
+		$ingreso->formaPago = $row['forma_pago'];
 		$ingreso->aprobado = $row['aprobado'];
 		$ingreso->organizacionIdorganizacion = $row['organizacion_idorganizacion'];
 

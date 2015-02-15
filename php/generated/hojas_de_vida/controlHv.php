@@ -73,13 +73,13 @@
 		
 			if(isset($_POST['miid']))
 			{
-			$asistente=DAOFactory::getHojaDeVidaDAO()->load($_POST['miid'],"0");
+			$hoja_de_vida=DAOFactory::getHojaDeVidaDAO()->load($_POST['miid'],"0");
       
       
       
             $txtNombres= $_POST['txtNombres'];
             $txtApellidos= $_POST['txtApellidos'];
-            $fecha_nac= $_POST['$fecha_nac'];
+            $fecha_nac= $_POST['p_fecha_nacimiento'];
             $edad= $_POST['edad'];
             $email= $_POST['email'];
             $direccion= $_POST['direccion'];
@@ -110,7 +110,14 @@
 		}
 		
     
-    
+    public function editaHV($id){
+		
+			return $rowsUpdate = DAOFactory::getModulesDAO()->update($id);
+
+		
+		
+		}
+	
     
     
 	}

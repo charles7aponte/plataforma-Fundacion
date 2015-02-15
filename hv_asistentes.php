@@ -24,6 +24,8 @@ include_once "header.php";
 
 <link rel="stylesheet" href="css/validationEngine.jquery.css" type="text/css"/>
 <link rel="stylesheet" href="css/datepicker.css" type="text/css"/>
+<link rel="stylesheet" href="css/style.css" type="text/css"/>
+
 
 <script>
     
@@ -89,73 +91,50 @@ include_once "header.php";
   function eliminarAsistente(email, id){
  
 
-				if (confirm("Esta seguro de eliminar?")) {
-					//id es igual
-					var ced ="id="+email;
-					$.ajax({ 
-						type: "POST",
-						url:"php/generated/asistentes/eliminarAsistente.php",
-						data: ced,
-						success:function(respuesta)
-								{
-									console.log(respuesta);
-									
-									
-									if(respuesta=="1")
-									{
-										
-									 $("#"+id).remove();
-									 
-									}
-								//	location.reload(true);
-								}
-					});
+	if (confirm("Esta seguro de eliminar?")) {
+            //id es igual
+            var ced ="id="+email;
+            $.ajax({ 
+                type: "POST",
+                url:"php/generated/asistentes/eliminarAsistente.php",
+                data: ced,
+                success:function(respuesta)
+                    {
+                        console.log(respuesta);
+
+                        if(respuesta=="1")
+                            {
+
+                                $("#"+id).remove();
+
+                            }
+                            //location.reload(true);
+                    }
+                    });
 				    
-				}	
-			}
+	}	
+    }
       
       
       
       
-      function editar(email, nombres, apellidos, edad, ciudad, miid){
-				//procedimiento = "editar";
-			
+        function editar(email, nombres, apellidos, edad, ciudad, miid){
+                //procedimiento = "editar";
+                $("#titulo").html("Editar asistente");	
                 $('#email').val(email);
-								$('#txtNombres').val(nombres);
+                $('#txtNombres').val(nombres);
                 $('#txtApellidos').val(apellidos);
-								$('#edad').val(edad);
+                $('#edad').val(edad);
                 $('#ciudad').val(ciudad);
-								$("#miid").val(miid);
-                ////$('#descripcion').val(descripcion);
-								//$('#precio').val(precio);
+                $("#miid").val(miid);
 								
 								
-								
-								/*console.log(activo);
-								if(activo==1){
-								
-									document.getElementById("si").checked=true;
-								
-								
-								}
-								
-								else if(activo==0){
-									
-									document.getElementById("no").checked=true;
-								
-								}*/
-								
-								
-								$("#btnProcesar").html("Editar");
-								
-								
-								$("#miaccion").val("editar");
+                $("#btnProcesar").html("Editar");								
+                $("#miaccion").val("editar");
 
 								
-								//cambioCategoriById(categoria);
-								
 														
-			}
+        }
 			
 	
       
@@ -163,13 +142,13 @@ include_once "header.php";
    	function nuevoElemento(){
 		
 		
-		document.getElementById('frmRegistrar').reset();
-		$("#btnProcesar").html("Agregar");
+      document.getElementById('frmRegistrar').reset();
+      $("#titulo").html("Agregar asistente");
+      $("#btnProcesar").html("Agregar");
+      $("#miaccion").val("agregar");
 		
-		$("#miaccion").val("agregar");
-		
-		return false;
-	}	
+      return false;
+  	}	
 	
       
  
@@ -184,7 +163,7 @@ include_once "header.php";
 </ul>
 
 
-<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar</h1></legend>
+<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar asistente</h1></legend>
   
   <?php  if(isset($_GET['e']))
     {
@@ -205,128 +184,75 @@ include_once "header.php";
           <div class="row">
               
               <!-- columna iz1-->
-              <div class="col-md-6">
+                <div class="col-md-6">
 					
-					<div class="form-group">                    
+                    <div class="form-group">                    
                        <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
                     
                         <div class="col-sm-9">
                           <input type="text"  name="txtNombres" class ="form-control validate[required,custom[onlyLetterSp]" id="txtNombres" placeholder="Nombre">
                         </div>
-                </div>
-				<!--
-				<div class="form-group" id="p_fecha_nacimiento">                    
-                       <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha de nacimiento:</label>
-                    
-                        <div class="col-sm-9">
-                          <input type="date"  name="fec_nacimiento" class ="form-control" id="txtNombres" placeholder="Fecha de nacimiento">
-                        </div>
-                </div>
-				-->
-				<div class="form-group">                    
+                    </div>
+				
+                    <div class="form-group">                    
                        <label for="email" class="col-sm-3 control-label">Email:</label>
                     
                         <div class="col-sm-9">
-                          <input type="email"  name="email" class="form-control" id="email" placeholder="Email">
+                          <input type="email"  name="email" class="form-control validate[required,custom[email]" id="email" placeholder="Email">
                         </div>
-                  </div>
-<!--
-				<div class="form-group" id="p_cc">                    
-                       <label for="cc" class="col-sm-3 control-label">CC :</label>
-                    
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="cc" name="cc" placeholder="12345">
-                        </div>
-                 </div>
-				  
-				 <div class="form-group" id="p_telefono">                    
-                       <label for="telefono" class="col-sm-3 control-label">Telefono:</label>
-                    
-                        <div class="col-sm-9">
-                          <input type="text"  name="telefono" class="form-control" id="telefono" placeholder="Telefono">
-                        </div>
-				</div>
--->
+                    </div>
 					
-				<div class="form-group" id="p_ciudad">                    
+                    <div class="form-group" id="p_ciudad">                    
                        <label for="ciudad" class="col-sm-3 control-label">Ciudad:</label>
                     
                         <div class="col-sm-9">
-                          <input type="text"  name="ciudad" class ="form-control validate[required,custom[onlyLetterSp]" id="ciudad" placeholder="Ciudad">
+                            <input type="text"  name="ciudad" class ="form-control validate[required,custom[onlyLetterSp]" id="ciudad" placeholder="Ciudad">
                         </div>
-                </div>
+                    </div>
 					
 				
                 
-              </div>
+                </div>
               
               
               <!-- columna dere-->
 			   
 			  
-					<div class="col-md-6">
-					   <div class="form-group">                    
-						   <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
-						
-							<div class="col-sm-9">
-							  <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp]" id="txtApellidos" placeholder="Apellidos">
-							</div>
-					</div>
+                  <div class="col-md-6">
+                    <div class="form-group">                    
+                        <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
+					
+                            <div class="col-sm-9">
+                                <input type="text"  name="txtApellidos" class ="form-control validate[required,custom[onlyLetterSp]" id="txtApellidos" placeholder="Apellidos">
+                            </div>
+                    </div>
 
-					<div class="form-group">                    
-                       <label for="edad" class="col-sm-3 control-label">Edad:</label>
+                    <div class="form-group">                    
+                        <label for="edad" class="col-sm-3 control-label">Edad:</label>
                     
-                        <div class="col-sm-9">
-                          <input type="text"  name="edad" class="form-control" id="edad" placeholder="Edad">
-                        </div>
-					</div>
+                            <div class="col-sm-9">
+                                <input type="text"  name="edad" class="form-control validate[required,custom[onlyNumberSp]" id="edad" placeholder="Edad">
+                            </div>
+                    </div>
 				
-					<!--
+		
                   
-                  
-                    <div class="form-group" id="p_direccion">                    
-                       <label for="direccion" class="col-sm-3 control-label">Direccion:</label>
-                    
-                        <div class="col-sm-9">
-                          <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Direccion">
-                        </div>
-                  </div>
-                  
-                  <div class="form-group" id="p_godson">                    
-						   <label for="godson" class="col-sm-3 control-label">Godson:</label>
-						
-							<div class="col-sm-9">
-							  <input type="text"  name="godson" class ="form-control validate[required,custom[onlyLetterSp] id="godson" placeholder="Godson">
-							</div>
-					</div>
-					
-					
-          -->        
-                  
-                 
-                  
-              </div>
+                </div>
               
               
-          </div>
+            </div>
           
           
-          <button 
-				
-				onclick="enviarDatos()"
-				type="button" class="btn btn-primary" style="margin-left: 100px;">
-					
-					
-					<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnProcesar">Agregar</b>
-				</button>	
+            <button 
+            onclick="enviarDatos()"
+            type="button" class="btn btn-primary" style="margin-left: 100px;">
+            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnProcesar">Agregar</b>
+            </button>	
           
-				<a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo
-				</a>
+            <a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo</a>
           
       </form>
     </fieldset>
-	
-	
 	
 	
 	
@@ -335,60 +261,51 @@ include_once "header.php";
 	<br />
 	<br />
 	<br />
-		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
-					<thead>
-						<tr role="row">
-							<th rowspan="1" colspan="1">Email</th>
-							<th rowspan="1" colspan="1">Nombres</th>
-							<th rowspan="1" colspan="1">Apellidos</th>
-							<th rowspan="1" colspan="1">Edad</th>
-							<th rowspan="1" colspan="1">Ciudad</th>
-							
-							<th rowspan="1" colspan="1">Acciones</th>
-						</tr>
-					</thead>
-									<tbody>
-<?php
-	$g =new GeneraHTMLAsistentes();
-	$g->crearTabla_asistentes();
-?>
+            <table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
+               	<thead>
+                    <tr role="row">
+                        <th rowspan="1" colspan="1">Email</th>
+                        <th rowspan="1" colspan="1">Nombres</th>
+                        <th rowspan="1" colspan="1">Apellidos</th>
+                        <th rowspan="1" colspan="1">Edad</th>
+                        <th rowspan="1" colspan="1">Ciudad</th>
+                        <th rowspan="1" colspan="1">Acciones</th>
+                    </tr>
+		</thead>
+		<tbody>
+                    <?php
+                            $g =new GeneraHTMLAsistentes();
+                            $g->crearTabla_asistentes();
+                    ?>
 						
-			
-
-					
-
-					</tbody>
-					<tfoot>
+		</tbody>
+		<tfoot>
 						
-					</tfoot>
+		</tfoot>
 
 
-		</table>
-
-	
-	
- 
-  
-  
-	
+            </table>
 	
 
+
+<button 
+	id="generar_asistente" onclick="generar()"
+	type="button" class="btn btn-primary" style="margin-left: 100px;">
+	<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> <b id="btnGenerar">Generar reporte</b>
+	</button>
+        </br></br></br></br>        
+        
+        
 <script>
 $("#frmRegistrar").validationEngine();
  
 $('.date').datepicker({language:"es"});
 
-
-
-
-
-
-
 </script>
 
  
- <?php
+<?php
 
-include_once "footer.php";
+    include_once "footer.php";
 
 ?>

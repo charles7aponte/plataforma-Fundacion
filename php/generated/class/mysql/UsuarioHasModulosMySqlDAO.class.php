@@ -3,7 +3,7 @@
  * Class that operate on table 'usuario_has_modulos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-04 22:29
+ * @date: 2015-02-13 23:50
  */
 class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 

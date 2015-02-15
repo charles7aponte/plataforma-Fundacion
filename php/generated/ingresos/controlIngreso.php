@@ -21,11 +21,12 @@
       $modalidad= $_POST['modalidad'];
       $beneficiario= $_POST['beneficiario'];
       $cc= $_POST['cc'];
+      $activo=$_POST['activo'];
 			$aprobado= $_POST['aprobado'];
 			$organizacion_idorganizacion= $_POST['organizacion_idorganizacion'];
 			
 			
-			echo "------$organizacion_idorganizacion";
+			echo "-----$activo";
 			
 			
 			
@@ -42,6 +43,8 @@
 			$ingreso->modalidad= $modalidad;
       $ingreso->beneficiario= $beneficiario;
       $ingreso->cc= $cc;
+      $ingreso->formaPago= $activo;
+      
       $ingreso->aprobado= $aprobado;
 			$ingreso->organizacionIdorganizacion=$organizacion_idorganizacion;
 			
@@ -69,7 +72,7 @@
 		
 			if(isset($_POST['miid']))
 			{
-			$ingreso=DAOFactory::getIngresosDAO()->load($_POST['miid']);
+			$ingreso=DAOFactory::getIngresosDAO()->load($_POST['miid'], "0");
             
             $ciudad= $_POST['ciudad'];
             $fecha= $_POST['fecha'];
@@ -79,6 +82,7 @@
             $modalidad= $_POST['modalidad'];
             $beneficiario= $_POST['beneficiario'];
             $cc= $_POST['cc'];
+            $activo=$_POST['activo'];
             $aprobado= $_POST['aprobado'];
             
 
@@ -93,8 +97,9 @@
             $ingreso->modalidad= $modalidad;
             $ingreso->beneficiario= $beneficiario;
             $ingreso->cc= $cc;
+            $ingreso->formaPago= $activo;
             $ingreso->aprobado= $aprobado;
-            $ingreso->organizacionIdorganizacion=$organizacion_idorganizacion;
+            $ingreso->organizacionIdorganizacion=0;
 
 				
 				DAOFactory::getIngresosDAO()->update($ingreso);

@@ -18,6 +18,6 @@ $guardarHv = new controlHv();
 	}
 
 	header('Status: 301 Moved Permanently', false, 301);
-header('Location: hv.php');
+  header('Location: hv.php');
 exit();
 ?>

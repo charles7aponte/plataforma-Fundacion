@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-04 22:29
+ * @date: 2015-02-13 23:50
  */
 interface EgresosDAO{
 
@@ -67,6 +67,8 @@ interface EgresosDAO{
 
 	public function queryByCc($value);
 
+	public function queryByFormaPago($value);
+
 	public function queryByAprobado($value);
 
 	public function queryByOrganizacionIdorganizacion($value);
@@ -87,6 +89,8 @@ interface EgresosDAO{
 	public function deleteByBeneficiario($value);
 
 	public function deleteByCc($value);
+
+	public function deleteByFormaPago($value);
 
 	public function deleteByAprobado($value);
 
