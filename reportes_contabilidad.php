@@ -13,7 +13,7 @@ if (!isset($_SESSION["usuario"])) {
 }
 
 include_once "php/generated/include_dao.php";
-include_once "/php/generated/reportes/ingresos-egresos.php";
+include_once "php/generated/reportes/ingresos-egresos.php";
 include_once "header.php";
 
 $data_reporte = new reporteIngresos();
