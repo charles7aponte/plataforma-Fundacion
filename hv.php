@@ -1,4 +1,17 @@
 <?php
+    session_start();   
+    if(!isset($_SESSION["usuario"])){
+        header("location: login.php");
+    }else{
+        require_once('funciones/login/iniciar_sesion.php');
+        $sesion = new sesiones();
+        
+        $valor = $sesion->validarAccesoModulos($_SESSION["idUsuario"], "HV/Asistentes");
+        if(count($valor) == 0){
+            header("location: pagina_error.php"); //TODO: pagina de error
+        }
+    }
+
 
 include_once "php/generated/include_dao.php";
 include_once "php/generated/GeneraHTMLAsistentes.php";
@@ -17,7 +30,7 @@ include_once "header.php";
     }
     
     .mifecha{
-      cursor:pointer !important;
+      cursor:text !important;
     }
     
     
@@ -177,14 +190,15 @@ include_once "header.php";
 </script>
 
 
-
+<!--
 <ul class="nav nav-pills">
     <li id="b_hv"   data-contenido="hv"  class="active" ><a href="#">HV</a></li>
     <li id="b_asistente"   data-contenido="Asistente"><a href="hv_asistentes.php">Asistentes</a></li>
 </ul>
+-->
 
 
-<fieldset><legend><h1 id="titulo" style="text-align: center;">Registrar HV</h1></legend>
+<fieldset><legend><h1  style="text-align: center;"></h1></legend>
   
   <?php  if(isset($_GET['e']))
     {
@@ -203,9 +217,20 @@ include_once "header.php";
           		<input type="hidden" name="organizacion_idorganizacion"  value="0">
           
         <div class="row">
+            
+            
+               <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><center><h4 id="titulo">Registrar hoja de vida de servidores</h4></center></h3>
+
+                            </div>
+                            <div class="panel-body" style="background-color: rgb(197, 225, 250); ">
+		
+            
               
               <!-- columna iz1-->
             <div class="col-md-6">
+                <br />
 					
 		<div class="form-group">                    
                     <label for="txtNombres" class="col-sm-3 control-label">Nombre:</label>
@@ -218,7 +243,7 @@ include_once "header.php";
                     <label for="fec_nacimiento" class="col-sm-3 control-label">Fecha de nacimiento:</label>
                         <div class="col-sm-9">
                           <input type="text"  name="p_fecha_nacimiento"
-                                 readonly="readonly"    class ="form-control validate[required] mifecha" id="p_fecha_nacimiento" placeholder="Fecha de nacimiento">
+                                    class ="form-control validate[required] mifecha" id="p_fecha_nacimiento" placeholder="AAAA-MM-DD">
                         </div>
                 </div>
 				
@@ -252,6 +277,7 @@ include_once "header.php";
               <!-- columna dere-->
 			   
             <div class="col-md-6">
+                <br />
                 <div class="form-group">                    
                     <label for="txtApellidos" class="col-sm-3 control-label">Apellidos:</label>
 			
@@ -264,7 +290,7 @@ include_once "header.php";
                     <label for="edad" class="col-sm-3 control-label">Edad:</label>
                     
                     <div class="col-sm-9">
-                        <input type="number"  name="edad" class="form-control validate[required,custom[onlyNumberSp] " id="edad" placeholder="Edad">
+                        <input type="text"  name="edad" class="form-control validate[required,custom[onlyNumberSp] " id="edad" placeholder="Edad">
                     </div>
 		</div>
 				
@@ -286,10 +312,8 @@ include_once "header.php";
 		
             </div>
               
-              
-        </div>
           
-          
+          <br />
           <button 
 				
           onclick="enviarDatos()"
@@ -299,17 +323,29 @@ include_once "header.php";
           
           <a  class="btn btn-primary" onclick="nuevoElemento()" >Nuevo
           </a>
-          
+        </div>
+       </div>
+      </div>
     </form>
 </fieldset>
 	
 	
 	
 	<!---tabla #1--->
+	
 	<br />
 	<br />
-	<br />
-	<br />
+        
+            
+               <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3 class="panel-title"><center><h4 id="titulo">Hojas de vida de servidores</h4></center></h3>
+
+                        </div>
+                            <div class="panel-body" style="background-color: rgb(197, 225, 250); ">
+		
+            
+        
 		<table id="example" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="example_info" style="width: 100%;">
                     <thead>
 			<tr role="row">
@@ -338,6 +374,8 @@ include_once "header.php";
 
 
 		</table>
+              </div>
+            </div>
         
   <p></p>       
 

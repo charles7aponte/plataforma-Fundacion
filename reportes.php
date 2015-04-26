@@ -211,3 +211,4 @@ $('.date').datepicker({language:"es"});
 
     include_once "footer.php";
 
+?>

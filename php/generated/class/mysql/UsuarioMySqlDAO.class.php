@@ -3,7 +3,7 @@
  * Class that operate on table 'usuario'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-02-24 16:52
  */
 class UsuarioMySqlDAO implements UsuarioDAO{
 
@@ -56,8 +56,9 @@ class UsuarioMySqlDAO implements UsuarioDAO{
  	 *
  	 * @param UsuarioMySql usuario
  	 */
+  //AQUI CORREGI MD5 EN CLAVE
 	public function insert($usuario){
-		$sql = 'INSERT INTO usuario (nombre, apellido, usuario, clave, activo, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO usuario (nombre, apellido, usuario, clave, activo, organizacion_idorganizacion) VALUES (?, ?, ?, md5(?), ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($usuario->nombre);
@@ -78,19 +79,31 @@ class UsuarioMySqlDAO implements UsuarioDAO{
  	 * @param UsuarioMySql usuario
  	 */
 	public function update($usuario){
-		$sql = 'UPDATE usuario SET nombre = ?, apellido = ?, usuario = ?, clave = ?, activo = ?, organizacion_idorganizacion = ? WHERE idusuario = ?';
-		$sqlQuery = new SqlQuery($sql);
+    //AQUI CORREGI MD5 EN CLAVE en el primer sql md5
+		$sql = 'UPDATE usuario SET nombre = ?, apellido = ?, usuario = ?, clave = md5(?), activo = ?, organizacion_idorganizacion = ? WHERE idusuario = ?';
+    //
+    //AQUI CORREGI en el else md5
+    if($usuario->clave==null)
+      $sql = 'UPDATE usuario SET nombre = ?, apellido = ?, usuario = ?,activo = ?, organizacion_idorganizacion = ? WHERE idusuario = ?';
+		else 
+      $sql = 'UPDATE usuario SET nombre = ?, apellido = ?, usuario = ?, clave = md5(?), activo = ?, organizacion_idorganizacion = ? WHERE idusuario = ?';
+		
+    $sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($usuario->nombre);
 		$sqlQuery->set($usuario->apellido);
 		$sqlQuery->set($usuario->usuario);
-		$sqlQuery->set($usuario->clave);
-		$sqlQuery->setNumber($usuario->activo);
+		
+     if($usuario->clave!=null)
+      $sqlQuery->set($usuario->clave);
+		
+    $sqlQuery->setNumber($usuario->activo);
 		$sqlQuery->setNumber($usuario->organizacionIdorganizacion);
 
 		$sqlQuery->setNumber($usuario->idusuario);
 		return $this->executeUpdate($sqlQuery);
 	}
+  /////
 
 	/**
  	 * Delete all rows
@@ -107,6 +120,16 @@ class UsuarioMySqlDAO implements UsuarioDAO{
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
+  
+  
+  //agregue querycredenciales  en el sql md5  =  md5('".$password."')"
+  public function queryByCredenciales($nombre, $password){
+            $sql = "SELECT * FROM usuario WHERE nombre = '".$nombre."' and clave = md5('".$password."')";
+            $sqlQuery = new SqlQuery($sql);
+            return $this->getList($sqlQuery);
+        }  
+  //      
+ 
 
 	public function queryByApellido($value){
 		$sql = 'SELECT * FROM usuario WHERE apellido = ?';

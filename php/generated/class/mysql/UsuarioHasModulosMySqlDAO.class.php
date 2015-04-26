@@ -3,7 +3,7 @@
  * Class that operate on table 'usuario_has_modulos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-03-14 20:11
  */
 class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 
@@ -31,6 +31,12 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 		return $this->getList($sqlQuery);
 	}
 	
+        public function queryAllByUsuario($idUsuario){            
+            $sql = 'SELECT * FROM usuario_has_modulos WHERE usuario_idusuario = '.$idUsuario;
+		$sqlQuery = new SqlQuery($sql);
+		return $this->getList($sqlQuery);
+        }
+        
 	/**
 	 * Get all records from table ordered by field
 	 *
@@ -41,6 +47,22 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
+  
+  ////////////////////////////////////////////////
+  public function queryByCredenciales($idUsuario){
+            $sql = 'SELECT * FROM usuario_has_modulos  WHERE usuario_idusuario ='.$idUsuario;
+            $sqlQuery = new SqlQuery($sql);
+            return $this->getList($sqlQuery);
+        }
+        
+        public function queryValidaUsuarioModulo($idUsuario, $nombreModulo){
+            $sql = 'SELECT uhm.modulos_id, uhm.usuario_idusuario, uhm.permiso_agregar, uhm.permiso_editar, uhm.permiso_eliminar'
+                    . ' FROM usuario_has_modulos uhm, modulos m '
+                    . 'WHERE uhm.usuario_idusuario ='.$idUsuario.' AND uhm.modulos_id = m.id AND m.nombre ="'.$nombreModulo.'"';
+            $sqlQuery = new SqlQuery($sql);
+            return QueryExecutor::execute($sqlQuery);            
+        }
+  ////////////////////////////////////////////////////////
 	
 	/**
  	 * Delete record from table
@@ -61,9 +83,12 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
  	 * @param UsuarioHasModulosMySql usuarioHasModulo
  	 */
 	public function insert($usuarioHasModulo){
-		$sql = 'INSERT INTO usuario_has_modulos ( usuario_idusuario, modulos_id) VALUES ( ?, ?)';
+		$sql = 'INSERT INTO usuario_has_modulos (permiso_agregar, permiso_editar, permiso_eliminar, usuario_idusuario, modulos_id) VALUES (?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($usuarioHasModulo->permisoAgregar);
+		$sqlQuery->setNumber($usuarioHasModulo->permisoEditar);
+		$sqlQuery->setNumber($usuarioHasModulo->permisoEliminar);
 
 		
 		$sqlQuery->setNumber($usuarioHasModulo->usuarioIdusuario);
@@ -81,9 +106,12 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
  	 * @param UsuarioHasModulosMySql usuarioHasModulo
  	 */
 	public function update($usuarioHasModulo){
-		$sql = 'UPDATE usuario_has_modulos SET  WHERE usuario_idusuario = ?  AND modulos_id = ? ';
+		$sql = 'UPDATE usuario_has_modulos SET permiso_agregar = ?, permiso_editar = ?, permiso_eliminar = ? WHERE usuario_idusuario = ?  AND modulos_id = ? ';
 		$sqlQuery = new SqlQuery($sql);
 		
+		$sqlQuery->setNumber($usuarioHasModulo->permisoAgregar);
+		$sqlQuery->setNumber($usuarioHasModulo->permisoEditar);
+		$sqlQuery->setNumber($usuarioHasModulo->permisoEliminar);
 
 		
 		$sqlQuery->setNumber($usuarioHasModulo->usuarioIdusuario);
@@ -102,6 +130,48 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function queryByPermisoAgregar($value){
+		$sql = 'SELECT * FROM usuario_has_modulos WHERE permiso_agregar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByPermisoEditar($value){
+		$sql = 'SELECT * FROM usuario_has_modulos WHERE permiso_editar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByPermisoEliminar($value){
+		$sql = 'SELECT * FROM usuario_has_modulos WHERE permiso_eliminar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+
+	public function deleteByPermisoAgregar($value){
+		$sql = 'DELETE FROM usuario_has_modulos WHERE permiso_agregar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByPermisoEditar($value){
+		$sql = 'DELETE FROM usuario_has_modulos WHERE permiso_editar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByPermisoEliminar($value){
+		$sql = 'DELETE FROM usuario_has_modulos WHERE permiso_eliminar = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
 
 
 	
@@ -115,6 +185,9 @@ class UsuarioHasModulosMySqlDAO implements UsuarioHasModulosDAO{
 		
 		$usuarioHasModulo->usuarioIdusuario = $row['usuario_idusuario'];
 		$usuarioHasModulo->modulosId = $row['modulos_id'];
+//		$usuarioHasModulo->permisoAgregar = $row['permiso_agregar'];
+//		$usuarioHasModulo->permisoEditar = $row['permiso_editar'];
+//		$usuarioHasModulo->permisoEliminar = $row['permiso_eliminar'];
 
 		return $usuarioHasModulo;
 	}

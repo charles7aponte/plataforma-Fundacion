@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 interface OrganizacionDAO{
 
@@ -55,10 +55,18 @@ interface OrganizacionDAO{
 
 	public function queryByDescripcion($value);
 
+	public function queryByNit($value);
+
+	public function queryByDireccion($value);
+
 
 	public function deleteByNombre($value);
 
 	public function deleteByDescripcion($value);
+
+	public function deleteByNit($value);
+
+	public function deleteByDireccion($value);
 
 
 }

@@ -15,10 +15,38 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return AsistenteEventosDAO
+	 */
+	public static function getAsistenteEventosDAO(){
+		return new AsistenteEventosMySqlExtDAO();
+	}
+
+	/**
 	 * @return CategoriaDAO
 	 */
 	public static function getCategoriaDAO(){
 		return new CategoriaMySqlExtDAO();
+	}
+
+	/**
+	 * @return ChequeDAO
+	 */
+	public static function getChequeDAO(){
+		return new ChequeMySqlExtDAO();
+	}
+
+	/**
+	 * @return DetalleChequeDAO
+	 */
+	public static function getDetalleChequeDAO(){
+		return new DetalleChequeMySqlExtDAO();
+	}
+
+	/**
+	 * @return DonacionesDAO
+	 */
+	public static function getDonacionesDAO(){
+		return new DonacionesMySqlExtDAO();
 	}
 
 	/**
@@ -36,6 +64,13 @@ class DAOFactory{
 	}
 
 	/**
+	 * @return EventosDAO
+	 */
+	public static function getEventosDAO(){
+		return new EventosMySqlExtDAO();
+	}
+
+	/**
 	 * @return HojaDeVidaDAO
 	 */
 	public static function getHojaDeVidaDAO(){
@@ -47,13 +82,6 @@ class DAOFactory{
 	 */
 	public static function getIngresosDAO(){
 		return new IngresosMySqlExtDAO();
-	}
-
-	/**
-	 * @return InventariosDAO
-	 */
-	public static function getInventariosDAO(){
-		return new InventariosMySqlExtDAO();
 	}
 
 	/**
@@ -71,10 +99,38 @@ class DAOFactory{
 	}
 
 	/**
-	 * @return RolesDAO
+	 * @return PadrinosDAO
 	 */
-	public static function getRolesDAO(){
-		return new RolesMySqlExtDAO();
+	public static function getPadrinosDAO(){
+		return new PadrinosMySqlExtDAO();
+	}
+
+	/**
+	 * @return PadrinosDonacionesDAO
+	 */
+	public static function getPadrinosDonacionesDAO(){
+		return new PadrinosDonacionesMySqlExtDAO();
+	}
+
+	/**
+	 * @return RetiristasDAO
+	 */
+	public static function getRetiristasDAO(){
+		return new RetiristasMySqlExtDAO();
+	}
+
+	/**
+	 * @return RetiristasRetirosDAO
+	 */
+	public static function getRetiristasRetirosDAO(){
+		return new RetiristasRetirosMySqlExtDAO();
+	}
+
+	/**
+	 * @return RetirosDAO
+	 */
+	public static function getRetirosDAO(){
+		return new RetirosMySqlExtDAO();
 	}
 
 	/**

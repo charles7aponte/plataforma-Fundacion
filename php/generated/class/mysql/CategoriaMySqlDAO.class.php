@@ -3,7 +3,7 @@
  * Class that operate on table 'categoria'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class CategoriaMySqlDAO implements CategoriaDAO{
 

@@ -3,7 +3,7 @@
 	 * Object represents table 'hoja_de_vida'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2015-02-13 23:50	 
+     	 * @date: 2015-04-16 05:12	 
 	 */
 	class HojaDeVida{
 		
@@ -18,6 +18,7 @@
 		var $godson;
 		var $telefono;
 		var $organizacionIdorganizacion;
+		var $fechaVinculacion;
 		
 	}
 ?>

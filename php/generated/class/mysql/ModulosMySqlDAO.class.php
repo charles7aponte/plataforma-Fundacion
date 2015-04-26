@@ -3,7 +3,7 @@
  * Class that operate on table 'modulos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-03-14 20:11
  */
 class ModulosMySqlDAO implements ModulosDAO{
 

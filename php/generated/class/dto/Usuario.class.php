@@ -3,7 +3,7 @@
 	 * Object represents table 'usuario'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2015-02-13 23:50	 
+     	 * @date: 2015-03-14 20:11	 
 	 */
 	class Usuario{
 		

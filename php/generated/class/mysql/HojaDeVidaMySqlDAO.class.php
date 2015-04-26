@@ -3,7 +3,7 @@
  * Class that operate on table 'hoja_de_vida'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 
@@ -61,7 +61,7 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
  	 * @param HojaDeVidaMySql hojaDeVida
  	 */
 	public function insert($hojaDeVida){
-		$sql = 'INSERT INTO hoja_de_vida (nombres, apellidos, fecha_nac, edad, email, direccion, cc, godson, telefono, id, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO hoja_de_vida (nombres, apellidos, fecha_nac, edad, email, direccion, cc, godson, telefono, fecha_vinculacion, id, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($hojaDeVida->nombres);
@@ -73,6 +73,7 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 		$sqlQuery->set($hojaDeVida->cc);
 		$sqlQuery->set($hojaDeVida->godson);
 		$sqlQuery->set($hojaDeVida->telefono);
+		$sqlQuery->set($hojaDeVida->fechaVinculacion);
 
 		
 		$sqlQuery->setNumber($hojaDeVida->id);
@@ -90,7 +91,7 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
  	 * @param HojaDeVidaMySql hojaDeVida
  	 */
 	public function update($hojaDeVida){
-		$sql = 'UPDATE hoja_de_vida SET nombres = ?, apellidos = ?, fecha_nac = ?, edad = ?, email = ?, direccion = ?, cc = ?, godson = ?, telefono = ? WHERE id = ?  AND organizacion_idorganizacion = ? ';
+		$sql = 'UPDATE hoja_de_vida SET nombres = ?, apellidos = ?, fecha_nac = ?, edad = ?, email = ?, direccion = ?, cc = ?, godson = ?, telefono = ?, fecha_vinculacion = ? WHERE id = ?  AND organizacion_idorganizacion = ? ';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($hojaDeVida->nombres);
@@ -102,6 +103,7 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 		$sqlQuery->set($hojaDeVida->cc);
 		$sqlQuery->set($hojaDeVida->godson);
 		$sqlQuery->set($hojaDeVida->telefono);
+		$sqlQuery->set($hojaDeVida->fechaVinculacion);
 
 		
 		$sqlQuery->setNumber($hojaDeVida->id);
@@ -183,6 +185,13 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 		return $this->getList($sqlQuery);
 	}
 
+	public function queryByFechaVinculacion($value){
+		$sql = 'SELECT * FROM hoja_de_vida WHERE fecha_vinculacion = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
 
 	public function deleteByNombres($value){
 		$sql = 'DELETE FROM hoja_de_vida WHERE nombres = ?';
@@ -247,6 +256,13 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByFechaVinculacion($value){
+		$sql = 'DELETE FROM hoja_de_vida WHERE fecha_vinculacion = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 
 	
 	/**
@@ -268,6 +284,7 @@ class HojaDeVidaMySqlDAO implements HojaDeVidaDAO{
 		$hojaDeVida->godson = $row['godson'];
 		$hojaDeVida->telefono = $row['telefono'];
 		$hojaDeVida->organizacionIdorganizacion = $row['organizacion_idorganizacion'];
+		$hojaDeVida->fechaVinculacion = $row['fecha_vinculacion'];
 
 		return $hojaDeVida;
 	}

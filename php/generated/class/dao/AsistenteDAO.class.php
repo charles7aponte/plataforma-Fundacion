@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 interface AsistenteDAO{
 
@@ -13,7 +13,7 @@ interface AsistenteDAO{
 	 * @param String $id primary key
 	 * @Return Asistente 
 	 */
-	public function load($email, $organizacionIdorganizacion);
+	public function load($idasistente, $organizacionIdorganizacion);
 
 	/**
 	 * Get all records from table
@@ -30,7 +30,7 @@ interface AsistenteDAO{
  	 * Delete record from table
  	 * @param asistente primary key
  	 */
-	public function delete($email, $organizacionIdorganizacion);
+	public function delete($idasistente, $organizacionIdorganizacion);
 	
 	/**
  	 * Insert record to table
@@ -59,6 +59,8 @@ interface AsistenteDAO{
 
 	public function queryByCiudad($value);
 
+	public function queryByEmail($value);
+
 
 	public function deleteByNombres($value);
 
@@ -67,6 +69,8 @@ interface AsistenteDAO{
 	public function deleteByEdad($value);
 
 	public function deleteByCiudad($value);
+
+	public function deleteByEmail($value);
 
 
 }

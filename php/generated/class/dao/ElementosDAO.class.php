@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 interface ElementosDAO{
 
@@ -63,7 +63,15 @@ interface ElementosDAO{
 
 	public function queryByCantidad($value);
 
+	public function queryByFechaIngreso($value);
+
+	public function queryByFechaCompra($value);
+
+	public function queryByMedida($value);
+
 	public function queryByCategoriaId($value);
+
+	public function queryByOrganizacionIdorganizacion($value);
 
 
 	public function deleteByNombre($value);
@@ -78,7 +86,15 @@ interface ElementosDAO{
 
 	public function deleteByCantidad($value);
 
+	public function deleteByFechaIngreso($value);
+
+	public function deleteByFechaCompra($value);
+
+	public function deleteByMedida($value);
+
 	public function deleteByCategoriaId($value);
+
+	public function deleteByOrganizacionIdorganizacion($value);
 
 
 }

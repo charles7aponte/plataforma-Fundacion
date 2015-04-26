@@ -3,7 +3,7 @@
 	 * Object represents table 'elementos'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2015-02-13 23:50	 
+     	 * @date: 2015-04-16 05:12	 
 	 */
 	class Elemento{
 		
@@ -14,7 +14,11 @@
 		var $categoria;
 		var $descripcion;
 		var $cantidad;
+		var $fechaIngreso;
+		var $fechaCompra;
+		var $medida;
 		var $categoriaId;
+		var $organizacionIdorganizacion;
 		
 	}
 ?>

@@ -3,7 +3,7 @@
  * Class that operate on table 'ingresos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class IngresosMySqlDAO implements IngresosDAO{
 
@@ -41,6 +41,20 @@ class IngresosMySqlDAO implements IngresosDAO{
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
+        
+        
+             
+        ////////////////////////////////////////
+        public function queryById($id){
+        $sql = 'SELECT * FROM ingresos WHERE idingresos = ?';
+        $sqlQuery = new SqlQuery($sql);
+                    $sqlQuery->setNumber($id);
+
+                    return $this->getRow($sqlQuery);
+      }
+        //////////////////////////////////////////
+
+        
 	
 	/**
  	 * Delete record from table
@@ -191,6 +205,45 @@ class IngresosMySqlDAO implements IngresosDAO{
 		$sqlQuery->set($value);
 		return $this->getList($sqlQuery);
 	}
+        
+        
+
+                public function queryByFechasDetalle($where) {
+               if ($where != "")
+                   $sql = 'SELECT * FROM ingresos WHERE ' . $where;
+               else
+                   $sql = 'SELECT * FROM ingresos';
+
+               $sqlQuery = new SqlQuery($sql);
+               $tab = QueryExecutor::execute($sqlQuery);
+               return $tab;
+           }
+
+           //////////////////////////////////
+           public function queryByMeses($mes_inicial, $mes_final) {
+               $where = "";
+               if ($mes_inicial != "" && $mes_final != "") {
+                   $where = $where . 'i.fecha BETWEEN STR_TO_DATE("' . $mes_inicial . '", "%Y-%m-%d")  AND STR_TO_DATE("' . $mes_final . '", "%Y-%m-%d") AND MONTH(i.fecha) BETWEEN MONTH("' . $mes_inicial . '") AND MONTH("' . $mes_final . '")';
+               }
+               if ($where == "")
+                   $sql = 'SELECT MONTH(i.fecha) mes, YEAR(i.fecha) year ,sum(i.valor) valor
+                             FROM ingresos i '
+                           . ' GROUP BY MONTH(i.fecha)';
+               else {
+                   $sql = 'SELECT MONTH(i.fecha) mes, YEAR(i.fecha) year ,sum(i.valor) valor
+                        FROM ingresos i WHERE ' . $where
+                           . ' GROUP BY MONTH(i.fecha)';
+               }
+               $sqlQuery = new SqlQuery($sql);
+               $tab = QueryExecutor::execute($sqlQuery);
+               return $tab;
+           }
+
+           ////////////////////////////////
+
+
+        
+        
 
 
 	public function deleteByCiudad($value){

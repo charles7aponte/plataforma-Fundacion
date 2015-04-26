@@ -3,7 +3,7 @@
 	 * Object represents table 'ingresos'
 	 *
      	 * @author: http://phpdao.com
-     	 * @date: 2015-02-13 23:50	 
+     	 * @date: 2015-04-16 05:12	 
 	 */
 	class Ingreso{
 		

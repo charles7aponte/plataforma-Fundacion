@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 interface HojaDeVidaDAO{
 
@@ -69,6 +69,8 @@ interface HojaDeVidaDAO{
 
 	public function queryByTelefono($value);
 
+	public function queryByFechaVinculacion($value);
+
 
 	public function deleteByNombres($value);
 
@@ -87,6 +89,8 @@ interface HojaDeVidaDAO{
 	public function deleteByGodson($value);
 
 	public function deleteByTelefono($value);
+
+	public function deleteByFechaVinculacion($value);
 
 
 }

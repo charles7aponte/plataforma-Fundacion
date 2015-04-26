@@ -3,7 +3,7 @@
  * Class that operate on table 'organizacion'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class OrganizacionMySqlDAO implements OrganizacionDAO{
 
@@ -57,11 +57,13 @@ class OrganizacionMySqlDAO implements OrganizacionDAO{
  	 * @param OrganizacionMySql organizacion
  	 */
 	public function insert($organizacion){
-		$sql = 'INSERT INTO organizacion (nombre, descripcion) VALUES (?, ?)';
+		$sql = 'INSERT INTO organizacion (nombre, descripcion, nit, direccion) VALUES (?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($organizacion->nombre);
 		$sqlQuery->set($organizacion->descripcion);
+		$sqlQuery->set($organizacion->nit);
+		$sqlQuery->set($organizacion->direccion);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$organizacion->idorganizacion = $id;
@@ -74,11 +76,13 @@ class OrganizacionMySqlDAO implements OrganizacionDAO{
  	 * @param OrganizacionMySql organizacion
  	 */
 	public function update($organizacion){
-		$sql = 'UPDATE organizacion SET nombre = ?, descripcion = ? WHERE idorganizacion = ?';
+		$sql = 'UPDATE organizacion SET nombre = ?, descripcion = ?, nit = ?, direccion = ? WHERE idorganizacion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($organizacion->nombre);
 		$sqlQuery->set($organizacion->descripcion);
+		$sqlQuery->set($organizacion->nit);
+		$sqlQuery->set($organizacion->direccion);
 
 		$sqlQuery->setNumber($organizacion->idorganizacion);
 		return $this->executeUpdate($sqlQuery);
@@ -107,6 +111,20 @@ class OrganizacionMySqlDAO implements OrganizacionDAO{
 		return $this->getList($sqlQuery);
 	}
 
+	public function queryByNit($value){
+		$sql = 'SELECT * FROM organizacion WHERE nit = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByDireccion($value){
+		$sql = 'SELECT * FROM organizacion WHERE direccion = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
 
 	public function deleteByNombre($value){
 		$sql = 'DELETE FROM organizacion WHERE nombre = ?';
@@ -117,6 +135,20 @@ class OrganizacionMySqlDAO implements OrganizacionDAO{
 
 	public function deleteByDescripcion($value){
 		$sql = 'DELETE FROM organizacion WHERE descripcion = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByNit($value){
+		$sql = 'DELETE FROM organizacion WHERE nit = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByDireccion($value){
+		$sql = 'DELETE FROM organizacion WHERE direccion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->set($value);
 		return $this->executeUpdate($sqlQuery);
@@ -135,6 +167,8 @@ class OrganizacionMySqlDAO implements OrganizacionDAO{
 		$organizacion->idorganizacion = $row['idorganizacion'];
 		$organizacion->nombre = $row['nombre'];
 		$organizacion->descripcion = $row['descripcion'];
+		$organizacion->nit = $row['nit'];
+		$organizacion->direccion = $row['direccion'];
 
 		return $organizacion;
 	}

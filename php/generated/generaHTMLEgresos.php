@@ -8,7 +8,7 @@
 class  GeneraHTMLEgresos{
 
 
-	public function crearTabla_Egresos(){
+	public function crearTabla_Egresos($permiso_editar, $permiso_eliminar){
 	
 		$datos=DAOFactory::getEgresosDAO()->queryAll();
     $nombre_pago="";
@@ -46,10 +46,13 @@ class  GeneraHTMLEgresos{
             			
 						echo "	<td>";
 						echo "		<img src='images/reload.png' alt='' ";
-						echo " title='editar' onclick=\"editar('".$datos[$i]->ciudad."', '".$datos[$i]->fecha."', '".$datos[$i]->valor."', '".$datos[$i]->pagadoA."', '".$datos[$i]->conceptoDe."', '".$datos[$i]->modalidad."',  '".$datos[$i]->beneficiario."',  '".$datos[$i]->cc."', ".$datos[$i]->formaPago.", '".$datos[$i]->aprobado."', ".$datos[$i]->idegresos.")\" ";
+						echo " title='editar' onclick=\"editar('".$datos[$i]->ciudad."', '".$datos[$i]->fecha."', '".$datos[$i]->valor."', '".$datos[$i]->pagadoA."', '".$datos[$i]->conceptoDe."', '".$datos[$i]->modalidad."',  '".$datos[$i]->beneficiario."',  '".$datos[$i]->cc."', ".$datos[$i]->formaPago.", '".$datos[$i]->aprobado."', ".$datos[$i]->idegresos.", ".$permiso_editar.")\" ";
 						echo "style='cursor: pointer;' >";
-						echo "		<img src='images/delete-item.png' alt='' title='eliminar' style='cursor: pointer;' onclick=\"eliminarIngreso(".$datos[$i]->idegresos.",'lista_usuarios_".($i)."')\">";
-
+						echo "		<img src='images/delete-item.png' alt='' title='eliminar' style='cursor: pointer;' onclick=\"eliminarIngreso(".$datos[$i]->idegresos.",'lista_usuarios_".($i)."', ".$permiso_eliminar.")\">";
+						
+						//VISUALIZAR
+						//echo "		<img src='images/ver.png' alt='' title='visualizar' style='cursor: pointer;'>";
+						echo "		<a href='formato_pdf/egresos_comprobante.php?accion=".$datos[$i]->idegresos."'><img src='images/ver.png' alt='' title='imprimir' style='cursor: pointer;' ></a>";
 						echo "	</td>";
 						echo "  </tr>";
 			}

@@ -8,7 +8,7 @@ background: #292929;
 font-size: 12px;padding-left: 161px;">
             <div class="fcred col-sm-12" style="padding: 10px 0px;
 color: #bbb;">
-          Copyright © 2015, <a href="#">
+          Copyright © 2015, <a href="/">
               Fundación Hogar Familia de Nazareth FHOFNA</a>.
         </div>
 

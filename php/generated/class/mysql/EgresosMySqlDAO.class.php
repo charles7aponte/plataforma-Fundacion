@@ -3,7 +3,7 @@
  * Class that operate on table 'egresos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class EgresosMySqlDAO implements EgresosDAO{
 
@@ -39,6 +39,17 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$sqlQuery = new SqlQuery($sql);
 		return $this->getList($sqlQuery);
 	}
+        
+        
+               //comprobante egresos
+        public function queryById($id){
+            $sql = 'SELECT * FROM egresos WHERE idegresos = ?';
+            $sqlQuery = new SqlQuery($sql);
+            $sqlQuery->setNumber($id);
+            return $this->getRow($sqlQuery);
+        }
+  ///
+        
 	
 	/**
  	 * Delete record from table
@@ -110,6 +121,44 @@ class EgresosMySqlDAO implements EgresosDAO{
 		$sqlQuery = new SqlQuery($sql);
 		return $this->executeUpdate($sqlQuery);
 	}
+        
+        
+        
+
+        //////////////////////////
+        public function queryByMes($mes_inicial, $mes_final) {
+            $where = "";
+
+            if ($mes_inicial != "" && $mes_final != "") {
+                $where = $where . 'e.fecha BETWEEN STR_TO_DATE("' . $mes_inicial . '", "%Y-%m-%d")  AND STR_TO_DATE("' . $mes_final . '", "%Y-%m-%d") AND MONTH(e.fecha) BETWEEN MONTH("' . $mes_inicial . '") AND MONTH("' . $mes_final . '")';
+            }
+            if ($where == "")
+                $sql = "SELECT MONTH(e.fecha) mes, YEAR(e.fecha) year ,sum(e.valor) valor
+                          FROM egresos e"
+                        . " GROUP BY MONTH(e.fecha)";
+            else {
+                $sql = "SELECT MONTH(e.fecha) mes, YEAR(e.fecha) year ,sum(e.valor) valor
+                          FROM egresos e WHERE " . $where
+                        . " GROUP BY MONTH(e.fecha)";
+            }
+            $sqlQuery = new SqlQuery($sql);
+            $tab = QueryExecutor::execute($sqlQuery);
+            return $tab;
+        }
+
+        ////////////////////////////
+
+        public function queryByFechasDetalle($where) {
+            if ($where != "")
+                $sql = 'SELECT * FROM egresos WHERE ' . $where;
+            else
+                $sql = 'SELECT * FROM egresos';
+
+            $sqlQuery = new SqlQuery($sql);
+            $tab = QueryExecutor::execute($sqlQuery);
+            return $tab;
+        }
+        
 
 	public function queryByCiudad($value){
 		$sql = 'SELECT * FROM egresos WHERE ciudad = ?';

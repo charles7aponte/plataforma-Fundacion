@@ -3,7 +3,7 @@
  * Class that operate on table 'elementos'. Database Mysql.
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-04-16 05:12
  */
 class ElementosMySqlDAO implements ElementosDAO{
 
@@ -57,7 +57,7 @@ class ElementosMySqlDAO implements ElementosDAO{
  	 * @param ElementosMySql elemento
  	 */
 	public function insert($elemento){
-		$sql = 'INSERT INTO elementos (nombre, activo, precio, categoria, descripcion, cantidad, categoria_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
+		$sql = 'INSERT INTO elementos (nombre, activo, precio, categoria, descripcion, cantidad, fecha_ingreso, fecha_compra, medida, categoria_id, organizacion_idorganizacion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($elemento->nombre);
@@ -66,7 +66,11 @@ class ElementosMySqlDAO implements ElementosDAO{
 		$sqlQuery->set($elemento->categoria);
 		$sqlQuery->set($elemento->descripcion);
 		$sqlQuery->set($elemento->cantidad);
+		$sqlQuery->set($elemento->fechaIngreso);
+		$sqlQuery->set($elemento->fechaCompra);
+		$sqlQuery->set($elemento->medida);
 		$sqlQuery->setNumber($elemento->categoriaId);
+		$sqlQuery->setNumber($elemento->organizacionIdorganizacion);
 
 		$id = $this->executeInsert($sqlQuery);	
 		$elemento->idelementos = $id;
@@ -79,7 +83,7 @@ class ElementosMySqlDAO implements ElementosDAO{
  	 * @param ElementosMySql elemento
  	 */
 	public function update($elemento){
-		$sql = 'UPDATE elementos SET nombre = ?, activo = ?, precio = ?, categoria = ?, descripcion = ?, cantidad = ?, categoria_id = ? WHERE idelementos = ?';
+		$sql = 'UPDATE elementos SET nombre = ?, activo = ?, precio = ?, categoria = ?, descripcion = ?, cantidad = ?, fecha_ingreso = ?, fecha_compra = ?, medida = ?, categoria_id = ?, organizacion_idorganizacion = ? WHERE idelementos = ?';
 		$sqlQuery = new SqlQuery($sql);
 		
 		$sqlQuery->set($elemento->nombre);
@@ -88,7 +92,11 @@ class ElementosMySqlDAO implements ElementosDAO{
 		$sqlQuery->set($elemento->categoria);
 		$sqlQuery->set($elemento->descripcion);
 		$sqlQuery->set($elemento->cantidad);
+		$sqlQuery->set($elemento->fechaIngreso);
+		$sqlQuery->set($elemento->fechaCompra);
+		$sqlQuery->set($elemento->medida);
 		$sqlQuery->setNumber($elemento->categoriaId);
+		$sqlQuery->setNumber($elemento->organizacionIdorganizacion);
 
 		$sqlQuery->setNumber($elemento->idelementos);
 		return $this->executeUpdate($sqlQuery);
@@ -145,8 +153,36 @@ class ElementosMySqlDAO implements ElementosDAO{
 		return $this->getList($sqlQuery);
 	}
 
+	public function queryByFechaIngreso($value){
+		$sql = 'SELECT * FROM elementos WHERE fecha_ingreso = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByFechaCompra($value){
+		$sql = 'SELECT * FROM elementos WHERE fecha_compra = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByMedida($value){
+		$sql = 'SELECT * FROM elementos WHERE medida = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->getList($sqlQuery);
+	}
+
 	public function queryByCategoriaId($value){
 		$sql = 'SELECT * FROM elementos WHERE categoria_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->getList($sqlQuery);
+	}
+
+	public function queryByOrganizacionIdorganizacion($value){
+		$sql = 'SELECT * FROM elementos WHERE organizacion_idorganizacion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->getList($sqlQuery);
@@ -195,8 +231,36 @@ class ElementosMySqlDAO implements ElementosDAO{
 		return $this->executeUpdate($sqlQuery);
 	}
 
+	public function deleteByFechaIngreso($value){
+		$sql = 'DELETE FROM elementos WHERE fecha_ingreso = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByFechaCompra($value){
+		$sql = 'DELETE FROM elementos WHERE fecha_compra = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByMedida($value){
+		$sql = 'DELETE FROM elementos WHERE medida = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->set($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
 	public function deleteByCategoriaId($value){
 		$sql = 'DELETE FROM elementos WHERE categoria_id = ?';
+		$sqlQuery = new SqlQuery($sql);
+		$sqlQuery->setNumber($value);
+		return $this->executeUpdate($sqlQuery);
+	}
+
+	public function deleteByOrganizacionIdorganizacion($value){
+		$sql = 'DELETE FROM elementos WHERE organizacion_idorganizacion = ?';
 		$sqlQuery = new SqlQuery($sql);
 		$sqlQuery->setNumber($value);
 		return $this->executeUpdate($sqlQuery);
@@ -219,7 +283,11 @@ class ElementosMySqlDAO implements ElementosDAO{
 		$elemento->categoria = $row['categoria'];
 		$elemento->descripcion = $row['descripcion'];
 		$elemento->cantidad = $row['cantidad'];
+		$elemento->fechaIngreso = $row['fecha_ingreso'];
+		$elemento->fechaCompra = $row['fecha_compra'];
+		$elemento->medida = $row['medida'];
 		$elemento->categoriaId = $row['categoria_id'];
+		$elemento->organizacionIdorganizacion = $row['organizacion_idorganizacion'];
 
 		return $elemento;
 	}

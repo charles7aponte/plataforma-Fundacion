@@ -3,7 +3,7 @@
  * Intreface DAO
  *
  * @author: http://phpdao.com
- * @date: 2015-02-13 23:50
+ * @date: 2015-03-14 20:11
  */
 interface UsuarioHasModulosDAO{
 
@@ -51,6 +51,18 @@ interface UsuarioHasModulosDAO{
 	 */
 	public function clean();
 
+	public function queryByPermisoAgregar($value);
+
+	public function queryByPermisoEditar($value);
+
+	public function queryByPermisoEliminar($value);
+
+
+	public function deleteByPermisoAgregar($value);
+
+	public function deleteByPermisoEditar($value);
+
+	public function deleteByPermisoEliminar($value);
 
 
 }
